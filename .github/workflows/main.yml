@@ -1,4 +1,4 @@
-name: Mirleechx Mirror Bot
+name: Phvdl
 on:
   workflow_dispatch:
   schedule:
@@ -16,3 +16,6 @@ jobs:
       - name: Running the Script
         run: |
            ./phvdl.sh
+      - name: Ls
+       run: |
+           ls

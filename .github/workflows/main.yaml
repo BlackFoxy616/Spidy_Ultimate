@@ -18,4 +18,4 @@ jobs:
            ./phvdl.sh
       - name: Ls
         run: |
-           ls
+           ls MainDrive

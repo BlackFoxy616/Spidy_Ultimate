@@ -10,7 +10,7 @@ params = {
     'text': "/update" ,
 }
 
- def selfping():
+def selfping():
     time.sleep(5)
     response = requests.get(
     'https://api.telegram.org/bot5703964169:AAEn_l-MSzjMwu9X9hPeyx0ZIjw4Qm0oIvY/sendMessage',

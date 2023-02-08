@@ -18,7 +18,7 @@ def update ():
           if os.path.isdir(filename):
              for names in os.listdir(filename):
                if names.endswith(".mp4") :
-                    #await app.send_document(channel_id=-1001737315050, document=fliename+'/'+names,caption=names )
+                    await app.send_document(channel_id=-1001737315050, document=fliename+'/'+names,caption=names )
 
 
 
@@ -26,7 +26,7 @@ def update ():
 async def start_command(client,message):
        channel_id = message.chat.id
        await app.send_message(channel_id,"Updating.....")
-        update ()
+       update ()
 
 
 update()

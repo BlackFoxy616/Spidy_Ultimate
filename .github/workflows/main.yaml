@@ -9,13 +9,4 @@ jobs:
     steps:
       - name: Downloading the Script
         run: |
-          wget https://gist.github.com/BlackFoxy616/224aa1ec41f88c581ff9ed3f2de10011/raw/phvdl.sh
-      - name: Permission
-        run: |
-           chmod 777 phvdl.sh
-      - name: Running the Script
-        run: |
-           ./phvdl.sh
-      - name: Ls
-        run: |
-           ls MainDrive
+          python main.py

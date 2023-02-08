@@ -26,7 +26,7 @@ async def update ():
 async def start_command(client,message):
        channel_id = message.chat.id
        await app.send_message(channel_id,"Updating.....")
-       update ()
+       await update ()
 
 
 update()

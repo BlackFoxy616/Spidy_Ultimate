@@ -7,6 +7,11 @@ jobs:
   run-sync-service:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+      - name: Cd Into Repo
+        run: |
+          cd ${{ github.workspace }}
       - name: Downloading the Script
         run: |
           python main.py

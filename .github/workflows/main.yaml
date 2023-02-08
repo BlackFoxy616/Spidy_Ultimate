@@ -18,7 +18,7 @@ jobs:
       - name: Cd Into Repo
         run: |
           cd ${{ github.workspace }}
-     - name: Yt-dlp
+      - name: Yt-dlp
         run: |
            sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp & sudo chmod a+rx yt-dlp
       - name: Running the Script 

@@ -17,7 +17,7 @@ jobs:
           cd ${{ github.workspace }}
       - name: Yt-dlp
         run: |
-           sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp && sudo chmod a+rx yt-dlp
+           sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux && sudo chmod a+rx yt-dlp_linux
       - name: Running the Script 
         run: |
           python main.py

@@ -8,7 +8,7 @@ app = Client("my_account")
 
 
              
-def update ():
+async def update ():
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:

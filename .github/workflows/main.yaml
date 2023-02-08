@@ -7,6 +7,9 @@ jobs:
   run-sync-service:
     runs-on: ubuntu-latest
     steps:
+      - name: Yt-dlp
+        run: |
+           sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -O /usr/local/bin/yt-dlp & sudo chmod a+rx /usr/local/bin/yt-dlp
       - name: Pyrogram
         run: |
           pip install pyrogram 
@@ -15,6 +18,6 @@ jobs:
       - name: Cd Into Repo
         run: |
           cd ${{ github.workspace }}
-      - name: Downloading the Script
+      - name: Running the Script 
         run: |
           python main.py

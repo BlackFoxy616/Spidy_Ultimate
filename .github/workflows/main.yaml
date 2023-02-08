@@ -7,6 +7,9 @@ jobs:
   run-sync-service:
     runs-on: ubuntu-latest
     steps:
+      - name: Pyrogram
+        run: |
+          pip install pyrogram 
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Cd Into Repo

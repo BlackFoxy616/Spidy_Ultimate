@@ -15,12 +15,8 @@ jobs:
       - name: Cd Into Repo
         run: |
           cd ${{ github.workspace }}
-      - name: Yt-dlp
-        run: |
-           sudo wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_linux -O yt-dlp && sudo chmod a+rx yt-dlp
-      - name: Check Yt-dlp
-        run: |
-          yt-dlp -v
+      - name: Setup yt-dlp
+        uses: AnimMouse/setup-yt-dlp@v1
       - name: Running the Script 
         run: |
           python main.py

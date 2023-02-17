@@ -12,6 +12,9 @@ app = Client(
 )
 
 
+async def progress(current, total):
+    print(f"{current * 100 / total:.1f}%")
+
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
      channel_id = message.chat.id
@@ -25,7 +28,7 @@ async def start_command(client,message):
           if os.path.isdir(filename):
              for names in os.listdir(filename):
                if names.endswith(".mp4") :
-                    await app.send_document(-1001737315050, document=filename+'/'+names,caption=names )
+                    await app.send_document(-1001737315050, document=filename+'/'+names,caption=names,progress=progress)
 
 
 

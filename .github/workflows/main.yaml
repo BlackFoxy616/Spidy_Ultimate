@@ -25,3 +25,10 @@ jobs:
       - name: Running the Script 
         run: |
           python main.py
+      - name: push changes to remote
+        run: |
+          git config --global user.name "BlackFoxy616"
+          git config --global user.email "AravindAp_32@protonmail.com"
+          git add -A
+          git commit -m "Update dllinks.txt"
+          git push

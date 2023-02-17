@@ -1,23 +1,16 @@
 from pyrogram import Client, filters
 import requests,os,csv,time
 
+api_id = 3702208
+api_hash = "3ee1acb7c7622166cf06bb38a19698a9"
+bot_token = "5300188722:AAFlruACp00Hv2ZD1RPjE9P0FahI52swqpU"
 
-app = Client("my_account")
-
-
-params = {
-    'chat_id': '-1001874651113',
-    'text': "/update" ,
-}
-
-def selfping():
-    time.sleep(5)
-    response = requests.get(
-    'https://api.telegram.org/bot5703964169:AAEn_l-MSzjMwu9X9hPeyx0ZIjw4Qm0oIvY/sendMessage',
-    params=params,
+app = Client(
+    "my_bot",
+    api_id=api_id, api_hash=api_hash,
+    bot_token=bot_token
 )
 
-             
 
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
@@ -39,4 +32,3 @@ async def start_command(client,message):
  
            
 app.run()  # Automatically start() and idle()
-selfping()

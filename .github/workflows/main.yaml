@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Pyrogram
         run: |
-          pip install pyrogram 
+          pip install pyrogram && pip install tgcrypto
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Cd Into Repo
@@ -19,6 +19,9 @@ jobs:
         uses: AnimMouse/setup-yt-dlp@v1
         with:
           with-ffmpeg: true
+      - name: Downloading links
+        run : |
+          wget https://gist.github.com/BlackFoxy616/4570ddd630a3eb3ae757db3d440a163b/raw/links.txt
       - name: Running the Script 
         run: |
           python main.py

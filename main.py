@@ -48,7 +48,7 @@ async def start_command(client,message):
     
      for  filename in os.listdir():
                if filename.endswith(".mp4") :
-                    await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+                    #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     os.system("""rclone --config "./rclone.conf" move '""" +filename +"""' "Mirror:" """)
                     os.system("""rclone --config "./rclone.conf" move "Mirror:" "Drive:/PHub" -vP --drive-server-side-across-configs=true """)
 

@@ -20,7 +20,7 @@ async def progress(current, total):
 async def echo(client, message):
     link = message.text
     os.system("""yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
-     for  filename in os.listdir():
+    for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)

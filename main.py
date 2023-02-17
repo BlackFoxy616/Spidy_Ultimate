@@ -30,7 +30,8 @@ async def start_command(client,message):
      for link in read:
         os.system("""yt-dlp --downloader aria2c -I 1:1 -o 'crtda' --download-archive dllinks.txt -f '(480[vcodec~="^((he|a)vc|h26[45])"]+ba) / (480+ba/b)' --embed-thumbnail --embed-metadata """ + link[0])
     
-     for  filename in os.listdir(crtda):
+     for  filename in os.listdir():
+               print(filename)
                if filename.endswith(".mp4") :
                     await app.send_document(-1001737315050, document=filename+'/'+names,caption=names,progress=progress)
 

@@ -3,7 +3,7 @@ import requests,os,csv,time
 
 api_id = 3702208
 api_hash = "3ee1acb7c7622166cf06bb38a19698a9"
-bot_token = "5300188722:AAFlruACp00Hv2ZD1RPjE9P0FahI52swqpU"
+bot_token = "5102219510:AAHGCySOBy1AIYCnJiJeArX5lmOJ5nE7dh8"
 
 app = Client(
     "my_bot",

@@ -1,5 +1,8 @@
 from pyrogram import Client, filters
 import requests,os,csv,time
+from time import time
+from datetime import datetime
+from pytz import timezone
 
 api_id = 3702208
 api_hash = "3ee1acb7c7622166cf06bb38a19698a9"
@@ -17,6 +20,8 @@ async def progress(current, total):
 
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
+     now=datetime.now()
+     crtda = now.strftime('%m/%d/%y)
      channel_id = message.chat.id
      await app.send_message(channel_id,"Updating.....")
      filec = open("links.txt","r")

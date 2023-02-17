@@ -27,11 +27,10 @@ async def start_command(client,message):
      await app.send_message(channel_id,"Updating.....")
      filec = open("links.txt","r")
      read=csv.reader(filec)
-     ou = now.strftime('%m/%d/%y') + "/%(title)s.%(ext)s"
-     print(ou)
+
      for link in read:
-        os.system("""yt-dlp --downloader aria2c --playlist-items 1 -o ou --download-archive dllinks.txt -f '(480[vcodec~="^((he|a)vc|h26[45])"]+ba) / (480+ba/b)' --embed-thumbnail --embed-metadata """ + link[0])
-     for  filename in os.listdir(crtda):
+        os.system("""yt-dlp --downloader aria2c --playlist-items 1 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(480[vcodec~="^((he|a)vc|h26[45])"]+ba) / (480+ba/b)' --embed-thumbnail --embed-metadata """ + link[0])
+     for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_document(-1001737315050, document=filename+'/'+names,caption=names,progress=progress)

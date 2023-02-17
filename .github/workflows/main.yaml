@@ -7,6 +7,10 @@ jobs:
   run-sync-service:
     runs-on: ubuntu-latest
     steps:
+      - name: Install RClone
+        run: |
+          curl https://rclone.org/install.sh | sudo bash
+          rclone help
       - name: Pyrogram
         run: |
           pip install pyrogram && pip install tgcrypto
@@ -22,10 +26,3 @@ jobs:
       - name: Running the Script 
         run: |
           python main.py
-      - name: push changes to remote
-        run: |
-          git config --global user.name "BlackFoxy616"
-          git config --global user.email "AravindAp_32@protonmail.com"
-          git add -A
-          git commit -m "Update dllinks.txt"
-          git push

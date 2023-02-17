@@ -28,7 +28,7 @@ async def start_command(client,message):
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system("""yt-dlp --downloader aria2c --playlist-items 1 -o crtda/+"%(title)s.%(ext)s" --download-archive dllinks.txt -f '(480[vcodec~="^((he|a)vc|h26[45])"]+ba) / (480+ba/b)' --embed-thumbnail --embed-metadata """ + link[0])
+        os.system("""yt-dlp --downloader aria2c --playlist-items 1 -o "{ now.strftime('%m/%d/%y') }/%(title)s.%(ext)s" --download-archive dllinks.txt -f '(480[vcodec~="^((he|a)vc|h26[45])"]+ba) / (480+ba/b)' --embed-thumbnail --embed-metadata """ + link[0])
      for  filename in os.listdir(crtda):
                print(filename)
                if filename.endswith(".mp4") :

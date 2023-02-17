@@ -3,7 +3,7 @@ import requests,os,csv,time
 
 api_id = 3702208
 api_hash = "3ee1acb7c7622166cf06bb38a19698a9"
-bot_token = "5300188722:AAFlruACp00Hv2ZD1RPjE9P0FahI52swqpU"
+bot_token = "5030635324:AAEaM9t5WBQHUeUAfJJK4r39h5457YwuD1k"
 
 app = Client(
     "my_bot",
@@ -17,8 +17,6 @@ async def progress(current, total):
 
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
-     now=datetime.now()
-     crtda = now.strftime('%m/%d/%y')
      channel_id = message.chat.id
      await app.send_message(channel_id,"Updating.....")
      filec = open("links.txt","r")

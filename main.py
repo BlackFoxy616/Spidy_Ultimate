@@ -37,7 +37,7 @@ async def start_command(client,message):
 
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
-     cmd  = message.chat.txt
+     cmd  = message.txt
      await app.send_message(channel_id,"Updating....."+cmd.split("")[1])
      os.system("""yt-dlp --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + cmd.split("")[1])
      for  filename in os.listdir():

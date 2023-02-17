@@ -17,6 +17,8 @@ jobs:
           cd ${{ github.workspace }}
       - name: Setup yt-dlp
         uses: AnimMouse/setup-yt-dlp@v1
+        with:
+          with-ffmpeg: true
       - name: Running the Script 
         run: |
           python main.py

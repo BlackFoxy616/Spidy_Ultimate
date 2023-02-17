@@ -21,7 +21,7 @@ async def progress(current, total):
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
      now=datetime.now()
-     crtda = now.strftime('%m/%d/%y)
+     crtda = now.strftime('%m/%d/%y')
      print(crtda)
      channel_id = message.chat.id
      await app.send_message(channel_id,"Updating.....")

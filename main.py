@@ -24,7 +24,9 @@ async def echo(client, message):
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.remove(filename)
+    os.system("""rclone --config "./rclone.conf" copy {filename} "Mirror:/PHub" """)
+    os.system("""rclone --config "./rclone.conf" move "Mirror:/PHub/" "Drive:/PHub/" -vP --drive-server-side-across-configs=true """)
+
 
 
 
@@ -47,8 +49,8 @@ async def start_command(client,message):
      for  filename in os.listdir():
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.remove(filename)
-
+     os.system("""rclone --config "./rclone.conf" copy {filename} "Mirror:/PHub" """)
+     os.system("""rclone --config "./rclone.conf" move "Mirror:/PHub/" "Drive:/PHub/" -vP --drive-server-side-across-configs=true """)
 
 
 
@@ -65,7 +67,10 @@ async def start_command(client,message):
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.remove(filename)
+     os.system("""rclone --config "./rclone.conf" move {filename} "Mirror:/PHub" """)
+     os.system("""rclone --config "./rclone.conf" move "Mirror:/PHub/" "Drive:/PHub/" -vP --drive-server-side-across-configs=true """)
+               
+    
 
 
 

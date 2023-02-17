@@ -25,7 +25,7 @@ async def start_command(client,message):
           if os.path.isdir(filename):
              for names in os.listdir(filename):
                if names.endswith(".mp4") :
-                    await app.send_document(channel_id=-1001737315050, document=filename+'/'+names,caption=names )
+                    await app.send_document(-1001737315050, document=filename+'/'+names,caption=names )
 
 
 

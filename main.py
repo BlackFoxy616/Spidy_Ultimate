@@ -27,7 +27,7 @@ async def start_command(client,message):
      for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
-                    await app.send_document(-1001737315050, document=filename,caption=filename,progress=progress)
+                    await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),progress=progress)
 
 
 

@@ -34,8 +34,8 @@ async def echo(client, message):
     os.system("""./yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():
                print(filename)
-               if filename.endswith(".mp4") :
-                    await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+               if filename.endswith(".mp4") or filename.endswith(".jpg") :
+                    await app.send_video(-1001737315050, video=filename,caption=filename,thumb=filename,progress=progress)
                     os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:/{crtda2}_Videos/" """)
                     os.system(f"""rclone --config "./rclone.conf" move "Drive:/" "TD:/PH/" -vP --drive-server-side-across-configs=true """)
 

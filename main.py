@@ -94,7 +94,7 @@ async def main():
                     #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",".jpg"))                    
                     os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:/Backup/{crtda2}/" """)
-                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:/Backup/{crtda2}" "Drive:/Backup/" -vP --drive-server-side-across-configs=true """)
+                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:" "Drive:" -vP --drive-server-side-across-configs=true """)
 
      
 

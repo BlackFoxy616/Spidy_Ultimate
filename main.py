@@ -7,7 +7,7 @@ from pytz import timezone
 
 
 now=datetime.now()
-crtda = now.strftime('%y%m/%d')
+crtda = now.strftime('%y/%m/%d')
 
 
 api_id = 3702208

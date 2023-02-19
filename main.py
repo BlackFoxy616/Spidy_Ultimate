@@ -60,7 +60,7 @@ async def start_command(client,message):
                     print(filename)
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:{crtda2}/" """)
-                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:{crtda2}/" "Drive:/PHub/{crtda2}" -vP --drive-server-side-across-configs=true """)
+                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:{crtda2}/" "Drive:/Backup/ForceBackups/{crtda2}" -vP --drive-server-side-across-configs=true """)
 
 
 
@@ -84,7 +84,7 @@ async def start_command(client,message):
 
 async def main():
    async with app:
-     await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
+     await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:

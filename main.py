@@ -19,7 +19,7 @@ async def progress(current, total):
 @app.on_message(filters.text & filters.private)
 async def echo(client, message):
     link = message.text
-    os.system("""yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
+    os.system("""./yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
@@ -40,7 +40,7 @@ async def start_command(client,message):
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system(f"""yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
+        os.system(f"""./yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
         #await app.edit_message_text(channel_id, uph.msg.id,"Uploading.....")
     
      for  filename in os.listdir():
@@ -60,7 +60,7 @@ async def start_command(client,message):
      channel_id = message.chat.id
      await app.send_message(channel_id,"Updating.....\n"\
 +cmd.split()[1])
-     os.system("""yt-dlp --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+     os.system("""./yt-dlp --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
      for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :

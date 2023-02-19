@@ -34,17 +34,18 @@ async def echo(client, message):
 
 @app.on_message(filters.command("updateall"))
 async def start_command(client,message):
-     
+     cmd = message.text
      channel_id = message.chat.id
      uph = await message.reply("Updating.....")
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system("""yt-dlp --downloader aria2c -I 1:10 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
+        os.system(f"""yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
         #await app.edit_message_text(channel_id, uph.msg.id,"Uploading.....")
     
      for  filename in os.listdir():
                if filename.endswith(".mp4") :
+                    print("uploading..")
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     os.system("""rclone --config "./rclone.conf" move '""" +filename +"""' "Mirror:" """)
                     os.system("""rclone --config "./rclone.conf" move "Mirror:" "Drive:/PHub" -vP --drive-server-side-across-configs=true """)

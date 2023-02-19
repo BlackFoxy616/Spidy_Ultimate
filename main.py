@@ -90,8 +90,8 @@ async def main():
      os.system(f"""yt-dlp --downloader aria2c -I 1:5 -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)  
      for  filename in os.listdir():
         if filename.endswith(".mp4"):
-            #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            await app.send_photo(-1001373543632, photo=filename,caption=filename)                    
+            await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",""))                    
             os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
             #os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
             os.remove(filename)

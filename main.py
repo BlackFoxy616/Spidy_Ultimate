@@ -78,4 +78,4 @@ async def main():
 
  
            
-app.run()  # Automatically start() and idle()
+app.run(main())  # Automatically start() and idle()

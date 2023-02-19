@@ -73,12 +73,12 @@ async def start_command(client,message):
 async def main():
    async with app:
      await app.send_message(-1001737315050,"Update Started!")
-     cmd = message.text
+     #cmd = message.text
      channel_id = message.chat.id
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system(f"""./yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])  
+        os.system(f"""./yt-dlp --downloader aria2c -I 1:5 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])  
         for  filename in os.listdir():
                if filename.endswith(".mp4"):
                     #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)

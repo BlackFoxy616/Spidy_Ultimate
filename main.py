@@ -93,9 +93,8 @@ async def main():
                if filename.endswith(".mp4"):
                     #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",".jpg"))                    
-                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:/{crtda2}/" """)
-                    time.sleep(2) 
-                    os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:/Backup/" -vP --drive-server-side-across-configs=true """)
+                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
+                    os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
 
      
 

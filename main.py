@@ -41,7 +41,6 @@ async def start_command(client,message):
      read=csv.reader(filec)
      for link in read:
         os.system("""yt-dlp --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
-        count+=1
         await app.edit_message_text(channel_id, uph.id,"Updating.....")
     
      for  filename in os.listdir():

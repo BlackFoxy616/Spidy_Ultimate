@@ -36,8 +36,8 @@ async def echo(client, message):
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:{crtda2}/" """)
-                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:{crtda2}/" "Drive:/PHub/{crtda2}" -vP --drive-server-side-across-configs=true """)
+                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:/{crtda2}/" """)
+                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:/{crtda2}/" "Drive:/PHub/{crtda2}" -vP --drive-server-side-across-configs=true """)
 
 
 
@@ -77,8 +77,8 @@ async def start_command(client,message):
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:{crtda2}/" """)
-                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:{crtda2}/" "Drive:/PHub/{crtda2}" -vP --drive-server-side-across-configs=true """)
+                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:{crtda2}_Videos/" """)
+                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:/" "Drive:/PH/{crtda2}" -vP --drive-server-side-across-configs=true """)
                
     
 
@@ -93,8 +93,8 @@ async def main():
                if filename.endswith(".mp4"):
                     #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",".jpg"))                    
-                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:{crtda2}/" """)
-                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:{crtda2}/" "Drive:/Backup/" -vP --drive-server-side-across-configs=true """)
+                    os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:/Backup/{crtda2}/" """)
+                    os.system(f"""rclone --config "./rclone.conf" move "Mirror:/Backup/" "Drive:/Backup/" -vP --drive-server-side-across-configs=true """)
 
      
 

@@ -10,6 +10,8 @@ now=datetime.now()
 crtda = now.strftime('%y/%m/%d')
 crtda2 = now.strftime('%y %m %d')
 
+indexlink = ""
+
 
 api_id = 3702208
 api_hash = "3ee1acb7c7622166cf06bb38a19698a9"

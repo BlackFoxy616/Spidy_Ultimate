@@ -69,7 +69,7 @@ async def start_command(client,message):
      channel_id = message.chat.id
      await app.send_message(channel_id,"Updating.....\n"\
 +cmd.split()[1])
-     os.system("""./yt-dlp --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+     os.system("""./yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
      for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
@@ -89,7 +89,7 @@ async def main():
         for  filename in os.listdir():
                if filename.endswith(".mp4"):
                     #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    await app.send_photo(-1001373543632, photo=filename,caption=filename.replace(".mp4",".jpg"))                    
+                    await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",".jpg"))                    
                     os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Mirror:{crtda}/" """)
                     os.system(f"""rclone --config "./rclone.conf" move "Mirror:{crtda}/" "Drive:/PHub" -vP --drive-server-side-across-configs=true """)
 

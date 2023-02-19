@@ -73,8 +73,6 @@ async def start_command(client,message):
 async def main():
    async with app:
      await app.send_message(-1001737315050,"Update Started!")
-     #cmd = message.text
-     channel_id = message.chat.id
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:

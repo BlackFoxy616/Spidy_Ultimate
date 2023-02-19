@@ -34,6 +34,7 @@ async def echo(client, message):
 
 @app.on_message(filters.command("updateall"))
 async def start_command(client,message):
+     fcount = 0
      cmd = message.text
      channel_id = message.chat.id
      uph = await message.reply("Updating.....")
@@ -42,8 +43,9 @@ async def start_command(client,message):
      for link in read:
         os.system(f"""./yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
         #await app.edit_message_text(channel_id, uph.msg.id,"Uploading.....")
+        
         for  filename in os.listdir():
-               if filename.endswith(".mp4") :
+               if filename.endswith(".mp4"):
                     print(filename)
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     os.system("""rclone --config "./rclone.conf" move '""" +filename +"""' "Mirror:" """)
@@ -69,7 +71,10 @@ async def start_command(client,message):
                
     
 
-
+async def main():
+   async with app:
+     await app.send_message("-1001737315050,text="Bot Started..!")
+     
 
  
            

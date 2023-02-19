@@ -34,7 +34,7 @@ async def echo(client, message):
     os.system("""./yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():
                print(filename)
-               if filename.endswith(".mp4") or filename.endswith(".jpg") :
+               if filename.endswith(".mp4")  :
                     await app.send_video(-1001737315050, video=filename,caption=filename,thumb=filename,progress=progress)
                     os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:/{crtda2}_Videos/" """)
                     os.system(f"""rclone --config "./rclone.conf" move "Drive:/" "TD:/PH/" -vP --drive-server-side-across-configs=true """)
@@ -90,9 +90,9 @@ async def main():
      for link in read:
         os.system(f"""./yt-dlp --downloader aria2c -I 1:5 -o '%(title)s.%(ext)s' --skip-download -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])  
         for  filename in os.listdir():
-               if filename.endswith(".mp4"):
+               if filename.endswith(".mp4") or filename.endswith(".jpg"):
                     #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",".jpg"))                    
+                    await app.send_photo(-1001373543632, photo=filename,caption=filename)                    
                     #os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
                     #os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
 

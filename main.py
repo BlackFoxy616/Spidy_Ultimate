@@ -73,7 +73,7 @@ async def start_command(client,message):
 
 async def main():
    async with app:
-     await app.send_message("-1001737315050,"Bot Started..!")
+     await app.send_message(-1001737315050,"Bot Started..!")
      
 
  

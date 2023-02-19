@@ -8,9 +8,9 @@ from pytz import timezone
 
 now=datetime.now()
 crtda = now.strftime('%y/%m/%d')
-crtda2 = now.strftime('%y %m %d')
+crtda2 = now.strftime('%y-%m-%d')
 
-indexlink = "https://index.mrspidy616.workers.dev/Phvdl/"
+indexlink = "https://index.mrspidy616.workers.dev/Phvdl"
 
 
 api_id = 3702208

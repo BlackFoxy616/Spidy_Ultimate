@@ -19,6 +19,9 @@ jobs:
       - name: Cd Into Repo
         run: |
           cd ${{ github.workspace }}
+      - name: Downloading links
+        run : |
+          wget https://gist.github.com/BlackFoxy616/4570ddd630a3eb3ae757db3d440a163b/raw/links.txt
       - name: Setup yt-dlp
         uses: AnimMouse/setup-yt-dlp@v1
         with:

@@ -84,6 +84,7 @@ async def start_command(client,message):
 
 async def main():
    async with app:
+    while True:
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
@@ -94,7 +95,8 @@ async def main():
             await app.send_photo(-1001373543632, photo=filename.replace(".mp4",".jpg"),caption=filename.replace(".mp4",""))                    
             os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
             #os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
-            os.remove(filename)
+            #os.remove(filename)
+            time.sleep(3600)
      
 
  

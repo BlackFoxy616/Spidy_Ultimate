@@ -1,6 +1,6 @@
 import os
 
-os.system("pip install psycopg2")
+#os.system("pip install psycopg2")
 
 
 import psycopg2
@@ -27,7 +27,7 @@ def create_table():
 
 
 def insert_db(lin):
-    query = "INSERT INTO PHLinks (LINK) VALUES('{}')".format(lin)
+    query = "INSERT INTO PHLinks (url) VALUES('{}')".format(lin)
     cursor.execute(query)
     conn.commit()
 

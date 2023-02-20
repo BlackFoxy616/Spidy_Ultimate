@@ -15,10 +15,10 @@ conn = psycopg2.connect(database="emlvwsts",
 cursor = conn.cursor()
 
 def create_table():
-  cursor.execute("DROP TABLE IF EXISTS Links")
+  cursor.execute("DROP TABLE IF EXISTS PHLinks")
 
   sql ='''CREATE TABLE PHLinks(
-   URL VARCHAR(255) NOT NULL
+   LINK VARCHAR(255) NOT NULL
 )'''
 
   cursor.execute(sql)
@@ -27,7 +27,7 @@ def create_table():
 
 
 def insert_db(link):
-    query = "INSERT INTO PHLinks (url) VALUES('{}')".format(link)
+    query = "INSERT INTO PHLinks (link) VALUES('{}')".format(link)
     cursor.execute(query)
     conn.commit()
 

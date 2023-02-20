@@ -85,7 +85,7 @@ async def start_command(client,message):
 
 async def main():
    async with app:
-     db = read_db()
+     datab = read_db()
      print(db)
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
@@ -93,10 +93,10 @@ async def main():
      os.system(f"""./yt-dlp --downloader aria2c -I 2 --download-archive dled.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
-       for link in db:
+       for db in datab:
         print ("Entered For db Forloop")
-        if filename not in link:
-            print ("Entered  not in db condition ")
+        if filename not in db:
+            print ("Entered  not in db condition ",db)
             insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    

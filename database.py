@@ -17,9 +17,8 @@ cursor = conn.cursor()
 def create_table():
   cursor.execute("DROP TABLE IF EXISTS Links")
 
-  sql ='''CREATE TABLE Links(
-   URL VARCHAR(255) NOT NULL,
-   NAME VARCHAR(255) NOT NULL
+  sql ='''CREATE TABLE PHLinks(
+   URL VARCHAR(255) NOT NULL
 )'''
 
   cursor.execute(sql)
@@ -28,12 +27,12 @@ def create_table():
 
 
 def insert_db(link,names):
-    query = "INSERT INTO Links (url,name) VALUES('{}','{}')".format(link,names)
+    query = "INSERT INTO PHLinks (url,name) VALUES('{}','{}')".format(link,names)
     cursor.execute(query)
     conn.commit()
 
 def read_db():
-   cursor.execute("SELECT * FROM Links")
+   cursor.execute("SELECT * FROM PHLinks")
    data = cursor.fetchall()
    return data
 

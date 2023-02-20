@@ -11,7 +11,7 @@ now=datetime.now()
 crtda = now.strftime('%y/%m/%d')
 crtda2 = now.strftime('%y-%m-%d')
 
-indexlink = "https://index.mrspidy616.workers.dev/"
+indexlink = "https://index.mrspidy616.workers.dev"
 
 
 api_id = 3702208
@@ -99,10 +99,10 @@ async def main():
        else:
             print ("Entered  not in db condition ")
             insert_db(filename)
-            #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    
-            #os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
-            #os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
+            await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}")                    
+            os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
+            os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
             try:
               os.remove(filename)
             except:

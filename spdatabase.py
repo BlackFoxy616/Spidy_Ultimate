@@ -1,6 +1,6 @@
 import os
 
-#os.system("pip install psycopg2")
+os.system("pip install psycopg2")
 
 
 import psycopg2

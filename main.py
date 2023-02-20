@@ -86,16 +86,13 @@ async def start_command(client,message):
 async def main():
    async with app:
      db = read_db()
-     insert_db("https://www.pornhub.com/playlist/263313231")
      print(db)
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      os.system(f"""./yt-dlp --downloader aria2c -I 2 --download-archive dled.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
-      print ("Entered For Listdir Forloop")
       if filename.endswith(".mp4"):
-       print ("Entered .mp4 if condition")
        for link in db:
         print ("Entered For db Forloop")
         if filename not in link:
@@ -103,8 +100,8 @@ async def main():
             insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    
-            os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
-            os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
+            #os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
+            #os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
             try:
               os.remove(filename)
             except:

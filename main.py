@@ -94,8 +94,9 @@ async def main():
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
        for db in datab:
-        print ("Entered For db Forloop")
-        if filename not in db:
+            if filename in db:
+              break
+       else:
             print ("Entered  not in db condition ",db)
             insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)

@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from pytz import timezone
 
-
+create_table()
 now=datetime.now()
 crtda = now.strftime('%y/%m/%d')
 crtda2 = now.strftime('%y-%m-%d')
@@ -90,7 +90,10 @@ async def main():
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      os.system(f"""yt-dlp --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)  
      for  filename in os.listdir():
+       for link in read_db():
         if filename.endswith(".mp4"):
+          if filename not in link:
+            insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    
             os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)

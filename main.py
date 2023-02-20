@@ -104,9 +104,9 @@ async def main():
             os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
             os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
             try:
-              os.remove(filename)d
+              os.remove(filename)
             except:
-               print("Fiif filename.endswith(".mp4"):le Moved I guess!!!")
+               print("File Moved I guess!!!")
           else:
             count+=1
      await app.stop()

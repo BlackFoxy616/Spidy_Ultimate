@@ -87,7 +87,7 @@ async def main():
    async with app:
      db = read_db()
      loop = True
-     p = 1
+     p = 10
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
@@ -107,8 +107,7 @@ async def main():
               os.remove(filename)
             except:
                print("File Moved I guess!!!")
-          else:
-            count+=1
+          count+=1
      await app.stop()
 
  

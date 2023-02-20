@@ -26,8 +26,8 @@ def create_table():
   conn.commit()
 
 
-def insert_db(link,names):
-    query = "INSERT INTO PHLinks (url,name) VALUES('{}','{}')".format(link,names)
+def insert_db(link):
+    query = "INSERT INTO PHLinks (url) VALUES('{}')".format(link)
     cursor.execute(query)
     conn.commit()
 

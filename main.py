@@ -86,7 +86,7 @@ async def start_command(client,message):
 async def main():
    async with app:
      datab = read_db()
-     print(db)
+     print(datab)
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")

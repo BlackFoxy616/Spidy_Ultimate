@@ -86,18 +86,15 @@ async def start_command(client,message):
 async def main():
    async with app:
      db = read_db()
-     loop = True
-     p = 10
+     print(db)
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
-     while loop:
-       os.system(f"""./yt-dlp --downloader aria2c -I {p} --download-archive dled.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-       
-       for  filename in os.listdir():
-        if filename.endswith(".mp4"):
-         for link in db:
-          if filename not in link:
+     os.system(f"""./yt-dlp --downloader -I 2 aria2c --download-archive dled.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     for  filename in os.listdir():
+      if filename.endswith(".mp4"):
+       for link in db:
+        if filename not in link:
             insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    
@@ -107,7 +104,6 @@ async def main():
               os.remove(filename)
             except:
                print("File Moved I guess!!!")
-          count+=1
      await app.stop()
 
  

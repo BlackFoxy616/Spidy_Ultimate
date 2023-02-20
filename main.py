@@ -92,7 +92,7 @@ async def main():
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
      while loop:
-       os.system(f"""yt-dlp --downloader aria2c -I {p} --download-archive dled.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+       os.system(f"""./yt-dlp --downloader aria2c -I {p} --download-archive dled.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
        
        for  filename in os.listdir():
         if filename.endswith(".mp4"):

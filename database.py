@@ -44,6 +44,7 @@ def delall_db(name):
 
 
 if 1==1:
+  #create_table()
   #insert_db("www.google.com","Google")
   for t in read_db():
       if "Goo" in t:

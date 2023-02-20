@@ -98,7 +98,7 @@ async def main():
        for link in db:
         print ("Entered For db Forloop")
         if filename not in link:
-           print ("Entered  not in db condition ")
+            print ("Entered  not in db condition ")
             insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    

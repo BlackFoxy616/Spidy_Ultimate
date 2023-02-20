@@ -97,7 +97,7 @@ async def main():
             if filename in db:
               break
        else:
-            print ("Entered  not in db condition ",db)
+            print ("Entered  not in db condition ")
             insert_db(filename)
             #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{indexlink}/{crtda}/{filename}")                    

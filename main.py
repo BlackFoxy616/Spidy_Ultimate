@@ -96,6 +96,8 @@ async def main():
             os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
             try:
               os.remove(filename)
+            except:
+               print("File Moved I guess!!!")
      await app.stop()
 
  

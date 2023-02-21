@@ -8,8 +8,8 @@ from pytz import timezone
 
 #create_table()
 now=datetime.now()
-crtda = now.strftime('%y/%m/%d')
-crtda2 = now.strftime('%y-%m-%d')
+crtda = now.strftime('%d/%m/%y')
+crtda2 = now.strftime('%d-%m-%y')
 
 indexlink = "https://index.mrspidy616.workers.dev"
 

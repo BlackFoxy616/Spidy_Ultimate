@@ -53,7 +53,7 @@ async def start_command(client,message):
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system(f"""yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
+        os.system(f"""yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
         #await app.edit_message_text(channel_id, uph.msg.id,"Uploading.....")
         
         for  filename in os.listdir():
@@ -73,10 +73,8 @@ async def start_command(client,message):
      channel_id = message.chat.id
      await app.send_message(channel_id,f"Downloading 10 Videos of.:\n\
 {cmd.split()[1]}")
-     for url in cmd.split():
-        if cmd.split().index(url) != 0 or cmd.split().index(url) != (len(cmd.split())-1):
-            os.system("""yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
-            for  filename in os.listdir():
+     os.system("""yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+     for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
@@ -118,4 +116,4 @@ async def start_command(client,message):
 
  
            
-app.run(main())  # Automatically start() and idle()
+app.run()  # Automatically start() and idle()

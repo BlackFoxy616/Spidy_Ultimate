@@ -91,9 +91,11 @@ async def main():
      link = "https://www.pornhub.com/playlist/263313231"
      await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
-     os.system(f"""yt-dlp  --downloader aria2c -I 2 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""yt-dlp  --downloader aria2c  -I 2 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
+       await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
+       await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""))
        for db in datab:
             if filename in db:
               break
@@ -113,7 +115,7 @@ async def main():
             
 @app.on_message(filters.command("stop"))
 async def start_command(client,message):
-     await app.stop()
+     await app.terminate()
 
  
            

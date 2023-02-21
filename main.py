@@ -95,11 +95,12 @@ async def main():
             #await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}")                    
             os.system(f"""rclone --config './rclone.conf' move "{filename}" "Drive:/{crtda2}/" """)
             os.system(f"""rclone --config './rclone.conf' move "{filename.replace(".mp4",".jpg")}" "Db:/PH-Pictures/" """)
-            os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
+            
             try:
               os.remove(filename)
             except:
                print("File Moved I guess!!!")
+     os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
      await app.stop()
             
             

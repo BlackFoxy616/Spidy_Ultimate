@@ -32,7 +32,7 @@ async def progress(current, total):
 @app.on_message(filters.text & filters.private)
 async def echo(client, message):
     link = message.text
-    os.system("""./yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
+    os.system("""yt-dlp --downloader aria2c -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4")  :
@@ -53,7 +53,7 @@ async def start_command(client,message):
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system(f"""./yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
+        os.system(f"""yt-dlp --downloader aria2c -I 1:{cmd.split()[1]} -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link[0])
         #await app.edit_message_text(channel_id, uph.msg.id,"Uploading.....")
         
         for  filename in os.listdir():
@@ -71,10 +71,12 @@ async def start_command(client,message):
 async def start_command(client,message):
      cmd  = message.text
      channel_id = message.chat.id
-     await app.send_message(channel_id,"Updating.....\n"\
-+cmd.split()[1])
-     os.system("""./yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
-     for  filename in os.listdir():
+     await app.send_message(channel_id,f"Downloading 10 Videos of.:\n\
+{cmd.split()[1]}")
+     for url in cmd.split():
+        if cmd.split().index(url) != 0 or cmd.split().index(url) != (len(cmd.split())-1):
+            os.system("""yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dllinks.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+            for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
@@ -88,26 +90,30 @@ async def main():
      datab = read_db()
      print(datab)
      link = "https://www.pornhub.com/playlist/263313231"
-     await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
-     #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}")
-     os.system(f"""yt-dlp  --downloader aria2c --download-archive dled.txt --skip-download -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
+     #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
+     os.system(f"""yt-dlp  --downloader aria2c --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
-      if filename.endswith(".jpg"):
+      if filename.endswith(".mp4"):
        for db in datab:
             if filename in db:
               break
        else:
-            print ("Entered  not in db condition ")
-            #insert_db(filename)
-            #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            insert_db(filename)
+            await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             #await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}")                    
-            #os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
+            os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}/" """)
             os.system(f"""rclone --config "./rclone.conf" move "{filename}" "Db:/PH-Pictures/" """)
-            #os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
+            os.system(f"""rclone --config "./rclone.conf" move "Drive:" "TD:Backup/" -vP --drive-server-side-across-configs=true """)
             try:
               os.remove(filename)
             except:
                print("File Moved I guess!!!")
+     await app.stop()
+            
+            
+@app.on_message(filters.command("stop"))
+async def start_command(client,message):
      await app.stop()
 
  

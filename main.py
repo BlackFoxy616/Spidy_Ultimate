@@ -80,7 +80,8 @@ async def start_command(client,message):
                     await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
                     os.system(f"""rclone --config "./rclone.conf" move '{filename}' "Drive:{crtda2}_Videos/" """)
                     os.system(f"""rclone --config "./rclone.conf" move "Drive:/" "TD:/PH/" -vP --drive-server-side-across-configs=true """)
-               
+     await app.stop()
+            
     
 
 async def main():

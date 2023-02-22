@@ -1,4 +1,4 @@
-from spdatabase import *
+#from spdatabase import *
 from pyrogram import Client, filters
 import requests,os,csv
 from time import time

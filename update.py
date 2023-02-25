@@ -39,7 +39,7 @@ async def main():
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system(f"""yt-dlp --downloader aria2c -I 1:3 --min-filesize 20M -o '%(title)s.%(ext)s' --download-archive dl.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link[0])
+        os.system(f"""yt-dlp --downloader aria2c -I 1:10--min-filesize 20M -o '%(title)s.%(ext)s' --download-archive dl.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link[0])
         for  filename in os.listdir():
                if filename.endswith(".mp4"):
                     await app.send_video(-1001585702100, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)

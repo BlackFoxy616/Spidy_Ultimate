@@ -39,11 +39,11 @@ async def main():
      filec = open("links.txt","r")
      read=csv.reader(filec)
      for link in read:
-        os.system(f"""yt-dlp --downloader aria2c -I 1:30 --min-filesize 20M -o '%(title)s.%(ext)s' --download-archive dl.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link[0])
+        os.system(f"""yt-dlp --downloader aria2c -I 1:3 --min-filesize 20M -o '%(title)s.%(ext)s' --download-archive dl.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link[0])
         for  filename in os.listdir():
                if filename.endswith(".mp4"):
                     await app.send_video(-1001585702100, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'Db:/PH-Pictures/'  ''')
+                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:PH-Pictures/'  ''')
                     os.system(f'''rclone --config "./rclone.conf" move """{filename}""" "Drive:/Backup/{crtda2}" ''')
                     os.system(f"""rclone --config "./rclone.conf" move "Drive:/Backup/{crtda2}" "TD:/Backup/FullBackups/{crtda2}" -vP --drive-server-side-across-configs=true """)
                     try:

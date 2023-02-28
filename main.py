@@ -89,21 +89,23 @@ async def start_command(client,message):
 async def main():
    async with app:
      link = "https://www.pornhub.com/playlist/263313231"
-     status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
+     #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
-     os.system(f"""yt-dlp   --downloader aria2c  --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     #os.system(f"""yt-dlp   --downloader aria2c  -download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""yt-dlp   --downloader aria2c  --skip-download  -o '%(title)s.%(ext)s'  --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
-      if filename.endswith(".mp4"):
-            await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+      if filename.endswith(".jpg"):
+            #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             #await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}")     
-            os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')               
-            os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/{crtda2}'  ''')
-            os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/{crtda2}" "TD:Backup/{crtda2}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+            #os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
+            os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')               
+            #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/{crtda2}'  ''')
+            #os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/{crtda2}" "TD:Backup/{crtda2}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
             try:
               os.remove(filename)
             except:
                print("File Moved I guess!!!")        
-     await app.send_message(-1001737315050, "Update Completed Successfully...", reply_to_message_id=status.id)      
+     #await app.send_message(-1001737315050, "Update Completed Successfully...", reply_to_message_id=status.id)      
 
 
 app.run(main())

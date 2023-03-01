@@ -7,8 +7,7 @@ jobs:
     steps:
       - name: Install RClone
         run: |
-          curl https://rclone.org/install.sh | sudo bash
-          rclone help
+            print(${{ secrets.TOKEN }})
       - name: Pyrogram
         run: |
           pip install pyrogram && pip install tgcrypto

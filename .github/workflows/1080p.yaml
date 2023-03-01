@@ -29,4 +29,4 @@ jobs:
           with-ffmpeg: true
       - name: Running the Script 
         run: |
-          python main.py
+          python 1080p.py

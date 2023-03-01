@@ -1,4 +1,4 @@
-name: Phvdl
+name: 1080p
 on:
   workflow_dispatch:
 jobs:

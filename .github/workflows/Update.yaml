@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Install RClone
         run: |
-            print(${{ secrets.TOKEN }})
+
       - name: Pyrogram
         run: |
           pip install pyrogram && pip install tgcrypto

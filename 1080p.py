@@ -37,7 +37,7 @@ async def main():
    async with app:
      link = "https://www.pornhub.com/playlist/263313231"
      status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
-     os.system(f"""yt-dlp   --downloader aria2c  -download-archive dled.txt  -o '%(title)s.%(ext)s' -f 'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""yt-dlp   --downloader aria2c   -o '%(title)s.%(ext)s' -f 'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
             await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)     

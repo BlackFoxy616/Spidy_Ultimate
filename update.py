@@ -1,17 +1,17 @@
-#from spdatabase import *
 from pyrogram import Client, filters
-import requests,os,csv
 from time import time
 import time
 from datetime import datetime
 from pytz import timezone
+import requests,os,csv
+import asyncio
 
-#create_table()
+
 now=datetime.now()
 crtda = now.strftime('%d/%m/%y')
 crtda2 = now.strftime('%d-%m-%y')
 
-indexlink = "https://index.mrspidy616.workers.dev"
+
 
 
 api_id = 3702208
@@ -28,30 +28,42 @@ app = Client(
 )
 
 
-async def progress(current, total):
-    print(f"{current * 100 / total:.1f}%")
-
-
-
 async def main():
-   async with app:
-     status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/FullBackups/{crtda2}/")
-     filec = open("links.txt","r")
-     read=csv.reader(filec)
-     for link in read:
-        os.system(f"""yt-dlp --downloader aria2c -I 1:10--min-filesize 20M -o '%(title)s.%(ext)s' --download-archive dl.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link[0])
-        for  filename in os.listdir():
-               if filename.endswith(".mp4"):
-                    await app.send_video(-1001585702100, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:PH-Pictures/'  ''')
-                    os.system(f'''rclone --config "./rclone.conf" move """{filename}""" "Drive:/Backup/{crtda2}" ''')
-                    os.system(f"""rclone --config "./rclone.conf" move "Drive:/Backup/{crtda2}" "TD:/Backup/FullBackups/{crtda2}" -vP --drive-server-side-across-configs=true """)
-                    try:
-                     os.remove(filename)
-                    except:
-                      print("File Moved I guess!!!")
-        await app.send_message(-1001585702100,f"Updated Successfully:\n{link[0]}", reply_to_message_id=status.id)       
+     await app.send_message(-1001737315050, "Bot Started\nSend Any Page Link To Download And Upload To Drive")
 
 
 
-app.run(main())
+
+
+@app.on_message(filters.text & filters.private)
+async def start_command(client,message):
+    link = message.text
+    status = await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
+    os.system("""yt-dlp --downloader aria2c  -I 1:5  --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+    for  filename in os.listdir():
+               if filename.endswith(".mp4")  :
+                    await app.send_photo(message.chat.id, photo=filename.replace(".mp4",".jpg")) 
+                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
+                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/Custom/{link.split('/')[-1]}'  ''')
+                    os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/Custom/{link.split('/')[-1]}" "TD:Backup/Custom/{link.split('/')[-1]}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+                    
+    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      
+
+@app.on_message(filters.command("update"))
+async def start_command(client,message):
+    link = message.text
+    status = await app.send_message(-1001737315050, f"Downloading {link.split('/')[-1]} Page!!!!")      
+    os.system("""yt-dlp --downloader aria2c  -I 1:5 --download-archive dl.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+    for  filename in os.listdir():
+               if filename.endswith(".mp4")  :
+                    await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg")) 
+                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
+                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/Custom/{link.split('/')[-1]}'  ''')
+                    os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/Custom/{link.split('/')[-1]}" "TD:Backup/Custom/{link.split('/')[-1]}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+                    
+    await app.send_message(-1001737315050, "Uploaded Successfully...", reply_to_message_id=status.id)      
+
+
+
+
+app.run()

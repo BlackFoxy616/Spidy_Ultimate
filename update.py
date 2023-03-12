@@ -51,7 +51,7 @@ async def start_command(client,message):
 
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
-    link = message.text
+    link = message.text[8:]
     status = await app.send_message(-1001737315050, f"Downloading {link} Page!!!!")      
     os.system("""yt-dlp --downloader aria2c  -o '%(title)s.%(ext)s' -f b/bv+ba --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():

@@ -38,7 +38,7 @@ async def main():
 @app.on_message(filters.text & filters.private)
 async def start_command(client,message):
     link = message.text
-    nane = link.split('/')[-1]
+    name = link.split('/')[-1]
     status = await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
     os.system("""yt-dlp --downloader aria2c  -I 1:2 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
     os.mkdir(name)

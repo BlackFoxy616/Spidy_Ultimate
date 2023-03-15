@@ -40,7 +40,7 @@ async def start_command(client,message):
     link = message.text
     name = link.split('/')[-1]
     status = await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
-    os.system("""yt-dlp --downloader aria2c  -I 1:2 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+    os.system("""yt-dlp --downloader aria2c  -I 1:50 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
     os.system(f"mkdir '{name}'")
     for  filename in os.listdir():
                if filename.endswith(".mp4")  :

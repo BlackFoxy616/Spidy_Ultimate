@@ -46,7 +46,7 @@ async def start_command(client,message):
                if filename.endswith(".mp4")  :
                  await app.send_photo(message.chat.id, photo=filename.replace(".mp4",".jpg"))
                  os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                 os.system(f"mv {filename} /{name}/{filename}")
+                 os.system(f"mv {filename} /{name}")
     os.system(f"zip -r {name}.zip {name}/")
 
     os.system(f'''rclone --config './rclone.conf' move  """{name}.zip"""  'Drive:/Backup/Custom/{link.split('/')[-1]}'  ''')

@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Install RClone
         run: |
+              curl https://rclone.org/install.sh | sudo bash
+
 
       - name: Pyrogram
         run: |

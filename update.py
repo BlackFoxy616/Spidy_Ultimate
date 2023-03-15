@@ -50,21 +50,6 @@ async def start_command(client,message):
                                         
     await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      
 
-@app.on_message(filters.command("dl"))
-async def start_command(client,message):
-    link = message.text[8:]
-    status = await app.send_message(-1001737315050, f"Downloading {link}")      
-    os.system(f"""yt-dlp -o '%(title)s.%(ext)s' -f '(mp4)[height=?1080]'  --write-thumbnail --embed-metadata {link}""")
-    for  filename in os.listdir():
-               if filename.endswith(".mp4")  :
-                    await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg")) 
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
-                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
-                    
-    await app.send_message(-1001737315050, "Uploaded Successfully...", reply_to_message_id=status.id)      
-
-
 
 
 app.run()

@@ -38,29 +38,23 @@ async def main():
 @app.on_message(filters.text & filters.private)
 async def start_command(client,message):
     link = message.text
-    name = link.split('/')[-1]
     status = await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
     os.system("""yt-dlp --downloader aria2c  -I 1:50 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-    os.system(f"mkdir '{name}'")
     for  filename in os.listdir():
                if filename.endswith(".mp4")  :
-                 await app.send_photo(message.chat.id, photo=filename.replace(".mp4",".jpg"))
-                 os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                 os.system(f"mv '''{filename}''' {name}/")
-    os.system(f"zip -r '{name}.zip' '''{name}/'''")
-
-    os.system(f'''rclone --config './rclone.conf' move  """{name}.zip"""  'Drive:/Backup/Custom/{link.split('/')[-1]}'  ''')
-
-    os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/Custom/{link.split('/')[-1]}" "TD:Backup/Custom/{link.split('/')[-1]}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
-
+                    await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg")) 
+                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
+                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
+                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+                    
                                         
     await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      
 
-@app.on_message(filters.command("update"))
+@app.on_message(filters.command("dl"))
 async def start_command(client,message):
     link = message.text[8:]
-    status = await app.send_message(-1001737315050, f"Downloading {link} Page!!!!")      
-    os.system("""yt-dlp --downloader aria2c  -o '%(title)s.%(ext)s' -f b/bv+ba --write-thumbnail --embed-metadata """ + link)
+    status = await app.send_message(-1001737315050, f"Downloading {link}")      
+    os.system(f"""yt-dlp -o '%(title)s.%(ext)s' -f '(mp4)[height=?1080]'  --write-thumbnail --embed-metadata {link}""")
     for  filename in os.listdir():
                if filename.endswith(".mp4")  :
                     await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg")) 

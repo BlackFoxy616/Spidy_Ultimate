@@ -41,13 +41,13 @@ async def start_command(client,message):
     name = link.split('/')[-1]
     status = await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
     os.system("""yt-dlp --downloader aria2c  -I 1:2 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-    os.system(f"mkdir {name}")
+    os.system(f"mkdir '{name}'")
     for  filename in os.listdir():
                if filename.endswith(".mp4")  :
                  await app.send_photo(message.chat.id, photo=filename.replace(".mp4",".jpg"))
                  os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                 os.system(f"mv {filename} {name}/")
-    os.system(f"zip -r {name}.zip {name}/")
+                 os.system(f"mv '''{filename}''' {name}/")
+    os.system(f"zip -r '{name}.zip' '''{name}/'''")
 
     os.system(f'''rclone --config './rclone.conf' move  """{name}.zip"""  'Drive:/Backup/Custom/{link.split('/')[-1]}'  ''')
 

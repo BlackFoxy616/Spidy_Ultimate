@@ -42,10 +42,11 @@ async def start_command(client,message):
     os.system("""yt-dlp --downloader aria2c  -I 1:50 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():
                if filename.endswith(".mp4")  :
-                    await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg")) 
+                    await app.send_photo(-100951605329, photo=filename.replace(".mp4",".jpg")) 
+                    await app.send_video(-1001966198510,video=filename)
                     os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
-                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+                    #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
+                    #os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
                     
                                         
     await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      

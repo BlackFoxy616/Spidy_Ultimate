@@ -24,6 +24,11 @@ app = Client(
     bot_token=bot_token
 )
 
+tglinks=""
+def write (text):
+   global tglinks
+   tglinks+=text
+
 
 async def progress(current, total):
     print(f"{current * 100 / total:.1f}%")
@@ -94,7 +99,7 @@ async def main():
       if filename.endswith(".jpg"):
             #video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             pic = await app.send_photo(-1001737315050, photo=filename,caption=f"{filename}")   
-            #tglinks+=f"""[{filename}](pic.id)\n"""
+            write(f"""[{filename}](pic.id)\n""")
             #os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
             #os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')               
             #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/{crtda2}'  ''')

@@ -95,8 +95,8 @@ async def main():
      #os.system(f"""yt-dlp   --downloader aria2c  --skip-download  -o '%(title)s.%(ext)s'  --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
-            await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            #await app.send_photo(-1001737315050, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}")     
+            video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            await app.send_photo(-100951605329, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}\n{video.id}")     
             os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
             #os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')               
             #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/{crtda2}'  ''')

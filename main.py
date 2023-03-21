@@ -5,6 +5,7 @@ from time import time
 import time
 from datetime import datetime
 from pytz import timezone
+from pyrogram import enums
 
 #create_table()
 now=datetime.now()
@@ -81,19 +82,21 @@ async def start_command(client,message):
                     os.system(f'''rclone --config "./rclone.conf" move "Drive:/Backup/PH/{crtda2}_Videos" "TD:/Backup/PH/{crtda2}_Videos" -vP --drive-server-side-across-configs=true ''')
             
     
-
+""".replace(".mp4",".jpg")"""
 async def main():
    async with app:
+     tglink=""
      link = "https://www.pornhub.com/playlist/263313231"
-     status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
+     status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}",reply_to_message_id=3391)
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
-     os.system(f"""yt-dlp   --downloader aria2c  --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-     #os.system(f"""yt-dlp   --downloader aria2c  --skip-download  -o '%(title)s.%(ext)s'  --write-thumbnail --embed-metadata """ + link)
+     #os.system(f"""yt-dlp   --downloader aria2c  --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""yt-dlp   --downloader aria2c -I 1:2  --skip-download  -o '%(title)s.%(ext)s'  --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
-      if filename.endswith(".mp4"):
-            video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            await app.send_photo(-100951605329, photo=filename.replace(".mp4",".jpg"),caption=f"{filename}\n{video.id}")     
-            os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
+      if filename.endswith(".jpg"):
+            #video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            pic = await app.send_photo(-100951605329, photo=filename,caption=f"{filename}")   
+            tglinks+=f"""[{filename}](pic.id)\n"""
+            #os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
             #os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')               
             #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/{crtda2}'  ''')
             #os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/{crtda2}" "TD:Backup/{crtda2}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
@@ -101,7 +104,7 @@ async def main():
               os.remove(filename)
             except:
                print("File Moved I guess!!!")        
-     await app.send_message(-1001737315050, "Update Completed Successfully...", reply_to_message_id=status.id)      
+     await app.send_message(-1001737315050,f"Update Completed Successfully...\ntuple({tglinks})", reply_to_message_id=status.id)      
 
 
 app.run(main())

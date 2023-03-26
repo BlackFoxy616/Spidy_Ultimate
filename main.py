@@ -98,7 +98,7 @@ async def main():
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
             video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            pic = await app.send_photo(-1001585702100, photo=filename,caption=f"{filename}\n((Link)[f"https://t.me/c/1737315050/{video.id}"]"),parse_mode=enums.ParseMode.MARKDOWN)   
+            pic = await app.send_photo(-1001585702100, photo=filename,caption=f"{filename}\n("[Video](f"https://t.me/c/1737315050/{video.id}"),"),parse_mode=enums.ParseMode.MARKDOWN)   
             
             os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
             #os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')

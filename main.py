@@ -24,11 +24,10 @@ app = Client(
     bot_token=bot_token
 )
 
-tglinks=""
-tglink= tuple(tglinks)
-def write (text):
-   global tglinks
-   tglinks+=text
+
+file = open("ids.csv","a+")
+write = csv.writer(file)
+read = csv.reader(file)
 
 
 async def progress(current, total):
@@ -92,24 +91,25 @@ async def start_command(client,message):
 async def main():
    async with app:
      link = "https://www.pornhub.com/playlist/263313231"
-     status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}",reply_to_message_id=3391)
+     status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
      #os.system(f"""yt-dlp   --downloader aria2c  --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-     os.system(f"""yt-dlp   --downloader aria2c -I 1:3 --skip-download  -o '%(title)s.%(ext)s'  --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""yt-dlp   --downloader aria2c -I 1:2 -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
-      if filename.endswith(".jpg"):
-            #video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            pic = await app.send_photo(-1001737315050, photo=filename,caption=f"{filename}")   
-            write(f"""[{filename}](pic.id)\n""")
-            #os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
-            #os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')               
-            #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/{crtda2}'  ''')
-            #os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/{crtda2}" "TD:Backup/{crtda2}" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
-            try:
+      if filename.endswith(".mp4"):
+            video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            pic = await app.send_photo(-1001585702100, photo=filename,caption=f"{filename}\n((Link)[f"https://t.me/c/1737315050/{video.id}"]"),parse_mode=enums.ParseMode.MARKDOWN)   
+            
+            os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
+            #os.system(f'''rclone --config './rclone.conf' move """{filename}"""  'PH_Pics:/Pictures/'  ''')
+            os.system(f'''rclone --config './rclone.conf' move  """{filename.replace('.mp4','.jpg')}"""  'Drive:/Pictures/'  ''')
+            #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/Backup/'  ''')
+            #os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/" "TD:Backup/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+            try: 
               os.remove(filename)
             except:
                print("File Moved I guess!!!")        
-     await app.send_message(-1001737315050,f"Update Completed Successfully...\n{tglink})", reply_to_message_id=status.id,parse_mode=enums.ParseMode.MARKDOWN)      
+     await app.send_message(-1001737315050,f"Update Completed Successfully...)", reply_to_message_id=status.id)      
 
 
 app.run(main())

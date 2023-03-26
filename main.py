@@ -110,7 +110,7 @@ async def main():
             #os.system(f"""rclone --config './rclone.conf' move "Drive:/Backup/" "TD:Backup/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
             try:
               os.remove(filename.replace(".mp4",".jpg"))
-              os.remove(filename.replace(".mp4",".png"))) 
+              os.remove(filename.replace(".mp4",".png"))
               os.remove(filename)
             except:
                print("File Moved I guess!!!")        

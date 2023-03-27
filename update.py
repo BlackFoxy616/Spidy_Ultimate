@@ -28,9 +28,50 @@ app = Client(
 )
 
 
-async def main():
-     await app.send_message(-1001737315050, "Bot Started\nSend Any Page Link To Download And Upload To Drive")
 
+
+
+
+
+@app.on_message(filters.command("updateall"))
+async def start_command(client,message):
+     cmd = message.text
+     channel_id = message.chat.id
+     uph = await message.reply(f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/ForceBackups/{crtda2}/")
+
+     filec = open("links.txt","r")
+     read=csv.reader(filec)
+     for link in read:
+        os.system(f"""yt-dlp --downloader aria2c -I 1:5 -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link[0])
+        for  filename in os.listdir():
+               if filename.endswith(".mp4"):
+                    print(filename)
+                    #await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+                    os.system(f'''rclone --config "./rclone.conf" move """{filename}""" "Drive:/Backup/{crtda2}" ''')
+                    os.system(f"""rclone --config "./rclone.conf" move "Drive:/Backup/{crtda2}" "TD:/Backup/ForceBackups/{crtda2}" -vP --drive-server-side-across-configs=true """)
+
+
+
+
+
+@app.on_message(filters.command("update"))
+async def start_command(client,message):
+     cmd  = message.text
+     channel_id = message.chat.id
+     if "playlist" in cmd.split()[1]:
+        await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{cmd.split()[1]}")
+     else:
+         await app.send_message(channel_id,f"Downloading:\n{cmd.split()[1]}")
+     os.system("""yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+     for  filename in os.listdir():
+               print(filename)
+               if filename.endswith(".mp4") :
+                    await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+                    os.system(f'''rclone --config "./rclone.conf" move """{filename}""" "Drive:/Backup/{crtda2}_Videos" ''')
+                    os.system(f'''rclone --config "./rclone.conf" move "Drive:/Backup/PH/{crtda2}_Videos" "TD:/Backup/PH/{crtda2}_Videos" -vP --drive-server-side-across-configs=true ''')
+            
+    
+""".replace(".mp4",".jpg")"""
 
 
 

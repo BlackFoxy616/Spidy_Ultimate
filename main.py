@@ -54,7 +54,7 @@ async def main():
       if filename.endswith(".mp4"):
             count+=1
             os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
-            #os.system(f'''ffmpeg -i """{filename}""" -vcodec libx264 -crf 18 -o """{fliename.replace('.mp4','H.264.mp4')}""" ''')
+            #os.system(f'''ffmpeg -i """{filename}""" -vcodec libx264 -crf 20 -o """{fliename.replace('.mp4','H.264.mp4')}""" ''')
             video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
             vid = f"https://t.me/c/1737315050/{video.id}"
             pic = await app.send_photo(-1001945634929, photo=filename.replace(".mp4",".png"),caption=vid)   

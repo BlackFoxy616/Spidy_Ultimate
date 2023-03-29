@@ -8,8 +8,6 @@ from pytz import timezone
 from pyrogram import enums
 
 #create_table()
-now=datetime.now()
-crtda = now.strftime('%d/%m/%y')
 
 api_id = 3702208
 api_hash = "3ee1acb7c7622166cf06bb38a19698a9"
@@ -29,16 +27,22 @@ file = open("ids.csv","a+")
 write = csv.writer(file)
 read = csv.reader(file)
 
+    stats = f'<b>├  Status: </b>Online\n'\
+             f'<b>├  Total No Of Videos: </b>{total}\n'\
+             f'<b>╰ Updated Time: </b>{crtda}\n\n'
 
 async def progress(current, total):
     print(f"{current * 100 / total:.1f}%")
 
 async def main():
    async with app:
+     await client.edit_message_text(-1001984459303,1,)
+     now=datetime.now()
+     crtda = now.strftime('%m/%d %I:%M:%S %p')
      link = "https://www.pornhub.com/playlist/263313231"
      #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
-     os.system(f"""yt-dlp   --downloader aria2c -I 200:400 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""yt-dlp   --downloader aria2c -I 400:600 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
      #os.system(f"""./yt-dlp   --downloader aria2c -I 1:1 -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
@@ -60,6 +64,6 @@ async def main():
             except:
                print("File Moved I guess!!!")        
      #await app.send_message(-1001737315050,f"Update Completed Successfully...)", reply_to_message_id=status.id)
-
+      await client.edit_message_text(-1001984459303,1,)
 
 app.run(main())

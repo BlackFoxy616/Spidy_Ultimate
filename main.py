@@ -56,10 +56,12 @@ async def main():
       if filename.endswith(".mp4"):
             count+=1
             os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
-            #os.system(f'''ffmpeg -i """{filename}""" -vcodec libx264 -crf 20 -o """{fliename.replace('.mp4','H.264.mp4')}""" ''')
-            video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-            vid = f"https://t.me/c/1737315050/{video.id}"
-            pic = await app.send_photo(-1001945634929, photo=filename.replace(".mp4",".png"),caption=vid)   
+            os.system(f'''ffmpeg -i """{filename}""" -vcodec libx264 -crf 20 -o """{fliename.replace('.mp4','H.264.mp4')}""" ''')
+            await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            await app.send_video(-1001737315050, video=fliename.replace('.mp4','H.264.mp4'),caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            #video = await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
+            #vid = f"https://t.me/c/1737315050/{video.id}"
+            pic = await app.send_photo(-1001945634929, photo=filename.replace(".mp4",".png"))   
             os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/'  ''')
             os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.png')}"""  'PH_Pics:/Pictures/Caps/'  ''')
             os.system(f'''rclone --config './rclone.conf' move  """{filename.replace('.mp4','.jpg')}"""  'Drive:/Pictures/'  ''')

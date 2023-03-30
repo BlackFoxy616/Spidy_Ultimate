@@ -44,14 +44,14 @@ async def main():
      count = 0
      now=datetime.now()
      crtda = now.strftime('%m/%d %I:%M:%S %p')
-     mssg = await app.send_message(-1001984459303,"Status:")
-     print(mssg.id)
-     await app.edit_message_text(-1001984459303,mssg.id,text=stats("Active",crtda,"Uploading..")[0])
+     #mssg = await app.send_message(-1001984459303,"Status:")
+     #print(mssg.id)
+     await app.edit_message_text(-1001984459303,4,text=stats("Active",crtda,"Uploading..")[0])
      link = "https://www.pornhub.com/playlist/263313231"
      #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
-     os.system(f"""yt-dlp   --downloader aria2c -I 400:600 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-     #os.system(f"""./yt-dlp   --downloader aria2c -I 1:1 -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
+     #os.system(f"""yt-dlp   --downloader aria2c -I 400:600 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""./yt-dlp   --downloader aria2c -I 1:1 -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
             count+=1
@@ -74,6 +74,6 @@ async def main():
             except:
                print("File Moved I guess!!!")        
      #await app.send_message(-1001737315050,f"Update Completed Successfully...", reply_to_message_id=status.id)
-     await app.edit_message_text(-1001984459303,mssg.id,text=stats("Offline",crtda,count)[0])
+     await app.edit_message_text(-1001984459303,4,text=stats("Offline",crtda,count)[0])
 
 app.run(main())

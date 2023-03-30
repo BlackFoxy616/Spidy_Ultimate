@@ -45,7 +45,7 @@ async def main():
      now=datetime.now()
      crtda = now.strftime('%m/%d %I:%M:%S %p')
      #mssg = await app.send_message(-1001984459303,"Status:")
-     #print(mssg.id)
+     print(stats("Active",crtda,"Uploading..")[0])
      await app.edit_message_text(-1001984459303,4,text=stats("Active",crtda,"Uploading..")[0])
      link = "https://www.pornhub.com/playlist/263313231"
      #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")

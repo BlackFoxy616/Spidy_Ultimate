@@ -45,13 +45,13 @@ async def main():
      now=datetime.now()
      crtda = now.strftime('%m/%d %I:%M:%S %p')
      #mssg = await app.send_message(-1001984459303,"Status:")
-     print(stats("Active",crtda,"Uploading.."))
+     #print(stats("Active",crtda,"Uploading.."))
      await app.edit_message_text(-1001984459303,4,text=stats("Active",crtda,"Uploading.."))
      link = "https://www.pornhub.com/playlist/263313231"
      #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
      #os.system(f"""yt-dlp   --downloader aria2c -I 400:600 --download-archive dled.txt  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
-     os.system(f"""./yt-dlp   --downloader aria2c -I 1:1 -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
+     os.system(f"""./yt-dlp   --downloader aria2c -I 100:100 -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
      for  filename in os.listdir():
       if filename.endswith(".mp4"):
             count+=1

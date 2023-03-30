@@ -44,7 +44,7 @@ async def main():
      count = 0
      now=datetime.now()
      crtda = now.strftime('%m/%d %I:%M:%S %p')
-     await app.edit_message_text(-1001984459303,1,text=stats("Active",crtda,"Uploading..")[0])
+     await app.edit_message_text(-1001984459303,3,text=stats("Active",crtda,"Uploading..")[0])
      link = "https://www.pornhub.com/playlist/263313231"
      #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
@@ -72,6 +72,6 @@ async def main():
             except:
                print("File Moved I guess!!!")        
      #await app.send_message(-1001737315050,f"Update Completed Successfully...", reply_to_message_id=status.id)
-     await app.edit_message_text(-1001984459303,1,text=stats("Offline",crtda,count)[0])
+     await app.edit_message_text(-1001984459303,3,text=stats("Offline",crtda,count)[0])
 
 app.run(main())

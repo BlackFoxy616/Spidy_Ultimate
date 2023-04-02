@@ -85,7 +85,7 @@ async def start_command(client,message):
                if filename.endswith(".mp4") :
                     os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
                     video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
-                    await app.send_photo(-1001945634929, photo=filename.replace(".mp4",".png")) 
+                    await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png")) 
                     os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
                     #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
                     #os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)

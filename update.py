@@ -30,7 +30,7 @@ app = Client(
 
 
 
-def auto(link):
+async def auto(link):
     if "playlist" in cmd.split()[1]:
        status = await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{link.split('/')[-1]}")
     else:
@@ -100,7 +100,7 @@ async def start_command(client,message):
 @app.on_message(filters.text & filters.private)
 async def start_command(client,message):
     link = message.text
-    await threading.Thread(target=auto, args=(link,)).start
+    threading.Thread(target=auto, args=(link,)).start
 
 
 app.run()

@@ -100,7 +100,7 @@ async def start_command(client,message):
 @app.on_message(filters.text & filters.private)
 async def start_command(client,message):
     link = message.text
-    threading.Thread(target=auto, args=(link,)).start
+    await threading.Thread(target=auto, args=(link,)).start
 
 
 app.run()

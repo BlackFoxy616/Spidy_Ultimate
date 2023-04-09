@@ -6,6 +6,7 @@ from pytz import timezone
 import requests,os,csv
 import asyncio
 from pyrogram import enums
+import threading
 
 now=datetime.now()
 crtda = now.strftime('%d/%m/%y')
@@ -29,6 +30,26 @@ app = Client(
 
 
 
+def auto(link):
+    if "playlist" in cmd.split()[1]:
+       status = await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{link.split('/')[-1]}")
+     else:
+         status = await app.send_message(channel_id,f"Downloading:\n{link}")
+    os.chdir(link.split('/')[-1])
+    print(link.split('/')[-1])
+    # await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
+    os.system("""yt-dlp --downloader aria2c  --playlist-items 10 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
+    for  filename in os.listdir():
+               if filename.endswith(".mp4") :
+                    os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
+                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
+                    await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png")) 
+                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
+                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
+                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+                    
+                                        
+    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      
 
 
 
@@ -62,7 +83,7 @@ async def start_command(client,message):
         await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{cmd.split()[1]}")
      else:
          await app.send_message(channel_id,f"Downloading:\n{cmd.split()[1]}")
-     os.system("""yt-dlp --downloader aria2c -I 10 -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+     os.system("""yt-dlp --downloader aria2c --playlist-items 10 -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
      for  filename in os.listdir():
                print(filename)
                if filename.endswith(".mp4") :
@@ -79,20 +100,7 @@ async def start_command(client,message):
 @app.on_message(filters.text & filters.private)
 async def start_command(client,message):
     link = message.text
-    status = await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
-    os.system("""yt-dlp --downloader aria2c  -I 1:15 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
-    for  filename in os.listdir():
-               if filename.endswith(".mp4") :
-                    os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
-                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
-                    await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png")) 
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                    #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
-                    #os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
-                    
-                                        
-    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      
-
+    threading.Thread(target=auto, args=(link,)).start
 
 
 app.run()

@@ -104,7 +104,8 @@ async def start_command(client,message):
                     #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
                     #os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
  
-    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)   
+    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id) 
+    app.terminate()
     
 
 

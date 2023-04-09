@@ -6,7 +6,7 @@ from pytz import timezone
 import requests,os,csv
 import asyncio
 from pyrogram import enums
-import threading
+
 
 now=datetime.now()
 crtda = now.strftime('%d/%m/%y')
@@ -30,26 +30,8 @@ app = Client(
 
 
 
-async def auto(link):
-    if "playlist" in cmd.split()[1]:
-       status = await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{link.split('/')[-1]}")
-    else:
-         status = await app.send_message(channel_id,f"Downloading:\n{link}")
-    os.chdir(link.split('/')[-1])
-    print(link.split('/')[-1])
-    # await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!")      
-    os.system("""yt-dlp --downloader aria2c  --playlist-items 10 --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
-    for  filename in os.listdir():
-               if filename.endswith(".mp4") :
-                    os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
-                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
-                    await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png")) 
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
-                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
-                    
-                                        
-    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)      
+
+      
 
 
 
@@ -58,7 +40,7 @@ async def auto(link):
 async def start_command(client,message):
      cmd = message.text
      channel_id = message.chat.id
-     uph = await message.reply(f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/ForceBackups/{crtda2}/")
+     #uph = await message.reply(f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/ForceBackups/{crtda2}/")
 
      filec = open("links.txt","r")
      read=csv.reader(filec)
@@ -96,11 +78,34 @@ async def start_command(client,message):
 
 
 
+                  
 
 @app.on_message(filters.text & filters.private)
 async def start_command(client,message):
     link = message.text
-    threading.Thread(target=auto, args=(link,)).start
+    print(link)
+
+    if "viewkey" not in link :
+       status = await app.send_message(message.chat.id,f"Downloading :\n{link.split('/')[-1]}")
+
+    else:
+         status = await app.send_message(message.chat.id,f"Downloading:\n{link.split('=')[-1]}")
+    # await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!") 
+    os.system("""yt-dlp --downloader aria2c  --min-filesize 25M --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
+    for  filename in os.listdir():
+               if filename.endswith(".mp4") :
+                    os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
+                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
+                    os.remove(filename)
+                    await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png"))
+                    os.remove(filename.replace(".mp4",".png"))
+                    os.remove(filename.replace(".mp4",".jpg"))
+                    #os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
+                    #os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
+                    #os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
+ 
+    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id)   
+    
 
 
 app.run()

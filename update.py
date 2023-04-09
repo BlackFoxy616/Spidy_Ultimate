@@ -33,7 +33,7 @@ app = Client(
 def auto(link):
     if "playlist" in cmd.split()[1]:
        status = await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{link.split('/')[-1]}")
-     else:
+    else:
          status = await app.send_message(channel_id,f"Downloading:\n{link}")
     os.chdir(link.split('/')[-1])
     print(link.split('/')[-1])

@@ -91,7 +91,7 @@ async def start_command(client,message):
     else:
          status = await app.send_message(message.chat.id,f"Downloading:\n{link.split('=')[-1]}")
     # await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!") 
-    os.system("""yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?720]' --write-thumbnail --embed-metadata """ + link)
+    os.system("""yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
     for  filename in os.listdir():
                if filename.endswith(".mp4") :
                     os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')

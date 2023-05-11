@@ -32,7 +32,7 @@ jobs:
           with-ffmpeg: true
       - name: Downloading Using ytdl
         run : |
-            yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail ${{ github.event.inputs.message }}
+            echo ${{ github.event.inputs.message }} & yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail ${{ github.event.inputs.message }}
       - name: Running the Script 
         run : |
           python dl.py

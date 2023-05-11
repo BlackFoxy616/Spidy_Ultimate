@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
    inputs:
      name: url
-     description: Link
+      description: Link
 
 jobs:
   run-sync-service:

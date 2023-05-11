@@ -2,7 +2,7 @@ name: AutoDL
 on:
   workflow_dispatch:
    inputs:
-      name: url
+     name: url
      description: Link
 
 jobs:

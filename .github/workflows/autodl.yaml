@@ -2,11 +2,52 @@ name: AutoDL
 on:
   workflow_dispatch:
    inputs:
+   name: url
 
+
+
+  description: Link
+
+jobs:
+  run-sync-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install RClone
+        run: |
+              curl https://rclone.org/install.sh | sudo bash
+      - name: Pyrogram
+        run: |
+          pip install pyrogram && pip install tgcrypto && pip install vcsi
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+      - name: Cd Into Repo
+        run: |
+          cd ${{ github.workspace }}
+      - name: Downloading config file
+        run: |
+          wget -qq ${{ secrets.Rclone }} -O rclone.conf
+      - name: Downloading links
+        run : |
+          wget https://gist.github.com/BlackFoxy616/4570ddd630a3eb3ae757db3d440a163b/raw/links.txt && wget https://gist.github.com/BlackFoxy616/b29d70dd199f557d7516f33e7011e8cb/raw/dl.txt
+      - name: Setup yt-dlp
+        uses: AnimMouse/setup-yt-dlp@v1
+        with:
+          with-ffmpeg: true
+      - name: Downloading Using ytdl
+        run: |
+            yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail ${{ github.event.inputs.message }}
+      - name: Running the Script 
+        run: |
+          python dl.py
+      - name: Deploy
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.TOKEN }}name: AutoDL
+on:
+  workflow_dispatch:
+   inputs:
       name: url
-
-
-        description: Link
+     description: Link
 
 jobs:
   run-sync-service:
@@ -43,6 +84,10 @@ jobs:
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.TOKEN }}
+          gist_id: b29d70dd199f557d7516f33e7011e8cb
+          file_path: dl.txt
+          file_type: text
+
           gist_id: b29d70dd199f557d7516f33e7011e8cb
           file_path: dl.txt
           file_type: text

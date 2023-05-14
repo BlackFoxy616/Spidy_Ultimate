@@ -6,7 +6,7 @@ from datetime import datetime
 from pytz import *
 import pytz
 from pyrogram import enums
-from spdatabase import ^
+from spdatabase import *
 
 
 

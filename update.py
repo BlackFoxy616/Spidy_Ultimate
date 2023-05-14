@@ -1,16 +1,11 @@
 from pyrogram import Client, filters
+import requests,os,csv
 from time import time
 import time
 from datetime import datetime
-from pytz import timezone
-import requests,os,csv
-import asyncio
+from pytz import *
+import pytz
 from pyrogram import enums
-
-
-now=datetime.now()
-crtda = now.strftime('%d/%m/%y')
-crtda2 = now.strftime('%d-%m-%y')
 
 
 
@@ -41,82 +36,29 @@ def stats(status,crtda,total):
     return stats
 
 
-async def main():
- async def start_command(client,message):
-     cmd = message.text
-     count = 0
-     await app.edit_message_text(-1001984459303,4,text=stats("Active",crtda,"Uploading.."))
-     channel_id = message.chat.id
-     filec = open("links.txt","r")
-     read=csv.reader(filec)
-     for link in read:
-        os.system("""yt-dlp --downloader aria2c  --match-filter "duration>180" --max-downloads 134 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
-        for  filename in os.listdir():
-               if filename.endswith(".mp4") :
-                    count+=1
-                    os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
-                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
-   
-                    await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png"))
-                 
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.png')}"""  'PH_Pics:/Pictures/Custom/caps/{link.split('/')[-1]}/'  ''')
-                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
-                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
-    await app.edit_message_text(-1001984459303,4,text=stats("Offline",crtda,count))
-    #await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id) 
-
-
-
-"""
 
 @app.on_message(filters.command("update"))
 async def start_command(client,message):
+     count = 0
+     now=datetime.now(pytz.timezone("Asia/Kolkata"))
+     crtda = now.strftime('%m/%d %H:%M %p')
+     await app.edit_message_text(-1001984459303,11,text=stats("Active",crtda,"Uploading.."))
      cmd  = message.text
      channel_id = message.chat.id
-     if "playlist" in cmd.split()[1]:
-        await app.send_message(channel_id,f"Downloading 10 Videos of Playlist:\n{cmd.split()[1]}")
+     if "playlist" in cmd.split()[1] or  "model" in cmd.split()[1] or  "pornstar" in cmd.split()[1]:
+        await app.send_message(channel_id,f"Downloading 100 Videos of Playlist:\n{cmd.split()[1]}")
      else:
          await app.send_message(channel_id,f"Downloading:\n{cmd.split()[1]}")
-     os.system("""yt-dlp --downloader aria2c --playlist-items 10 -o '%(title)s.%(ext)s' --download-archive dled.txt -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
+     os.system("""yt-dlp --downloader aria2c --match-filter "duration>180" --max-downloads 100 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
      for  filename in os.listdir():
-               print(filename)
                if filename.endswith(".mp4") :
-                    await app.send_video(-1001737315050, video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"),progress=progress)
-                    os.system(f'''rclone --config "./rclone.conf" move """{filename}""" "Drive:/Backup/{crtda2}_Videos" ''')
-                    os.system(f'''rclone --config "./rclone.conf" move "Drive:/Backup/PH/{crtda2}_Videos" "TD:/Backup/PH/{crtda2}_Videos" -vP --drive-server-side-across-configs=true ''')
-            
-    
-""".replace(".mp4",".jpg")"""
-
-
-
-                  
-@app.on_message(filters.text & filters.private)
-async def start_command(client,message):
-    link = message.text
-    print(link)
-
-    if "viewkey" not in link :
-       status = await app.send_message(message.chat.id,f"Downloading :\n{link.split('/')[-1]}")
-
-    else:
-         status = await app.send_message(message.chat.id,f"Downloading:\n{link.split('=')[-1]}")
-    # await app.send_message(message.chat.id, f"Downloading {link.split('/')[-1]} Page!!!!") 
-    os.system("""yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail --embed-metadata """ + link)
-    for  filename in os.listdir():
-               if filename.endswith(".mp4") :
+                    count+=1
                     os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
-                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
-   
                     await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png"))
-                 
-                    os.system(f'''rclone --config './rclone.conf' move """{filename.replace('.mp4','.jpg')}"""  'PH_Pics:/Pictures/Custom/{link.split('/')[-1]}'  ''')
-                    os.system(f'''rclone --config './rclone.conf' move  """{filename}"""  'Drive:/'  ''')
-                    os.system(f"""rclone --config './rclone.conf' move "Drive:/" "TD:/" -vP --delete-empty-src-dirs --drive-server-side-across-configs=true """)
- 
-    await app.send_message(message.chat.id, "Uploaded Successfully...", reply_to_message_id=status.id) 
-    """
+                    video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
+     await app.edit_message_text(-1001984459303,11,text=stats("Offline",crtda,count))            
 
 
-app.run(main())
+
+
+app.run()

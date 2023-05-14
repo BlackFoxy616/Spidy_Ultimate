@@ -6,6 +6,7 @@ from datetime import datetime
 from pytz import *
 import pytz
 from pyrogram import enums
+from spdatabase import ^
 
 
 
@@ -46,16 +47,27 @@ async def start_command(client,message):
      cmd  = message.text
      channel_id = message.chat.id
      if "playlist" in cmd.split()[1] or  "model" in cmd.split()[1] or  "pornstar" in cmd.split()[1]:
-        await app.send_message(channel_id,f"Downloading 100 Videos of Playlist:\n{cmd.split()[1]}")
+        await app.send_message(channel_id,f"Downloading Videos of Playlist:\n{cmd.split()[1]}")
      else:
          await app.send_message(channel_id,f"Downloading:\n{cmd.split()[1]}")
      os.system("""yt-dlp --downloader aria2c --match-filter "duration>180" --max-downloads 100 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + cmd.split()[1])
      for  filename in os.listdir():
-               if filename.endswith(".mp4") :
+          if filename.endswith(".mp4") :
+            for j in read_db():
+                if j == filename:
+                    break
+            else:
+                    insert_db(filename)
                     count+=1
                     os.system(f'''vcsi """{filename}""" -g 2x6 --metadata-position hidden -o """{filename.replace('.mp4','.png')}""" ''')
                     await app.send_photo(-1001848025191, photo=filename.replace(".mp4",".png"))
                     video = await app.send_video(-1001585702100,video=filename,caption=filename.replace(".mp4",""),thumb=filename.replace(".mp4",".jpg"))
+                    try:
+                      os.remove(filename.replace(".mp4",".jpg"))
+                      os.remove(filename.replace(".mp4",".png"))
+                      os.remove(filename)
+                    except:
+                       print("File Moved I guess!!!") 
      await app.edit_message_text(-1001984459303,11,text=stats("Offline",crtda,count))            
 
 

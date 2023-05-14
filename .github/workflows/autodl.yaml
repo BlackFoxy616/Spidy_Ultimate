@@ -5,7 +5,6 @@ on:
      name: 
       description: Link
       message:
-
         required: true
 
 jobs:
@@ -33,12 +32,9 @@ jobs:
         uses: AnimMouse/setup-yt-dlp@v1
         with:
           with-ffmpeg: true
-      - name: Downloading Using ytdl
-        run : |
-            echo "${{ github.event.inputs.message }}" & yt-dlp --downloader aria2c  --match-filter "duration>90" --max-downloads 10 -N 4 --playlist-random --download-archive dl.txt -o '%(title)s.%(ext)s' -f '(mp4)[height=?240]' --write-thumbnail "${{ github.event.inputs.message }}"
       - name: Running the Script 
         run : |
-          python dl.py
+          python update.py
       - name: Deploy
         uses: exuanbo/actions-deploy-gist@v1
         with:

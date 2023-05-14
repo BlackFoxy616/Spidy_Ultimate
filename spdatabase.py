@@ -27,7 +27,7 @@ def create_table():
 
 
 def insert_db(ln):
-    query = "INSERT INTO PHLinks (url) VALUES(%s);"
+    query = "INSERT INTO PHLinks (link) VALUES(%s);"
     data = (ln,)
     cursor.execute(query,data)
     conn.commit()

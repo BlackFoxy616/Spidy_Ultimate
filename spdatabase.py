@@ -30,11 +30,12 @@ def insert_db(ln):
     query = "INSERT INTO PHLinks (link) VALUES(%s);"
     data = (ln,)
     cursor.execute(query,data)
-    conn.commit()
+    conn.commit() 
 
 def read_db():
    cursor.execute("SELECT * FROM PHLinks")
    data = cursor.fetchall()
+   conn.commit()
    return data
 
 def delall_db(name):
@@ -43,10 +44,3 @@ def delall_db(name):
 
 
 
-
-if 1==1:
-  #create_table()
-  #insert_db("www.google.com","Google")
-  for t in read_db():
-      if "Goo" in t:
-         print(t)

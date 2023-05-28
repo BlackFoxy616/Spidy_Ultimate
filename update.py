@@ -86,13 +86,12 @@ async def main():
             crtda = now.strftime('%m/%d %H:%M %p')
             await app.edit_message_text(-1001984459303,11,text=stats("Active",crtda,link,"Uploading.."))
             insert_links(link)
-            os.system("""yt-dlp --downloader aria2c --match-filter "duration>180" --max-downloads 100 -N 4 --playlist-random  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
+            os.system("""yt-dlp --downloader aria2c --match-filter "duration>180" --max-downloads 100 -N 4  --download-archive dled.txt --playlist-random  -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)
             
             
             for  filename in os.listdir():
                 if filename.endswith(".mp4") :
                     for j in read_db():
-                        print(j,filename)
                         if j == filename:
                             break
                     else:

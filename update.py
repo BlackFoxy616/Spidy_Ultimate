@@ -73,7 +73,7 @@ async def start_command(client,message):
 
 def run():
 
-   app.run()
+
    
 
    time.sleep(7)
@@ -87,4 +87,4 @@ def keep_alive():
     
 
 keep_alive()
-#app.run()
+app.run()

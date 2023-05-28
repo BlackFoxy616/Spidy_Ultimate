@@ -1,6 +1,6 @@
 try:
   import psycopg2
- except:
+except:
   import os
   os.system("pip install psycopg2")
 

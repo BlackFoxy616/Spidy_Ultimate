@@ -39,3 +39,10 @@ jobs:
           gist_id: cb76be7842c810328ac99cee2f070306
           file_path: dled.txt
           file_type: text
+      - name: Deploy
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.TOKEN }}
+          gist_id: 4570ddd630a3eb3ae757db3d440a163b
+          file_path: links.txt
+          file_type: text

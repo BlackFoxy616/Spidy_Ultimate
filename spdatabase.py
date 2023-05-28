@@ -3,6 +3,7 @@ try:
 except:
   import os
   os.system("pip install psycopg2")
+  import psycopg2
 
 conn = psycopg2.connect(database="emlvwsts",
                         host="mahmud.db.elephantsql.com",

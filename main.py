@@ -49,7 +49,8 @@ async def main():
      #mssg = await app.send_message(-1001984459303,"Status:")
      #print(stats("Active",crtda,"Uploading.."))
      await app.edit_message_text(-1001984459303,4,text=stats("Active",crtda,"Uploading.."))
-     link = "https://www.pornhub.com/playlist/263313231"
+     #link = "https://www.pornhub.com/playlist/263313231"
+     link = "https://www.pornhub.com/playlist/275691841"
      #status = await app.send_message(-1001737315050,f"Update Started!\nDate:{crtda}")
      #await app.send_message(-1001373543632,f"Update Started!\nDate:{crtda}\nIndex Link: {indexlink}/Backup/{crtda2}/")
      os.system(f"""yt-dlp  --downloader aria2c --download-archive dled.txt  --max-downloads 200 -o '%(title)s.%(ext)s' -f '(mp4)[height=?480]' --write-thumbnail --embed-metadata """ + link)

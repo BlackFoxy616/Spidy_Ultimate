@@ -67,7 +67,7 @@ def dled():
 def stats(status,crtda,link,total):
     stats = f'<b>├  Status: </b>{status}\n'\
             f'<b>├  Uploaded Videos: </b>{total}\n'\
-            f'<b>├  {link.split("/")[-2].capitalize()}: </b>{link.split("/")[-1]}\n'\
+            f'<b>├  {link.split("/")[-2].capitalize()}: </b>{link.split("/")[-1].capitalize()}\n'\
             f'<b>╰  Updated Time: </b>{crtda}\n\n'
     return stats
 

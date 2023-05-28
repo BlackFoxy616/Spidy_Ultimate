@@ -7,7 +7,7 @@ from pytz import *
 import pytz
 from pyrogram import enums
 from spdatabase import *
-
+from threading import Thread
 
 
 
@@ -71,6 +71,15 @@ async def start_command(client,message):
      await app.edit_message_text(-1001984459303,11,text=stats("Offline",crtda,count))            
 
 
+def run():
 
+   app.run()
 
-app.run()
+def keep_alive():  
+
+    t = Thread(target=run)
+    t.start()
+    time.sleep(7)
+    quit()
+
+#app.run()

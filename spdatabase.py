@@ -1,10 +1,8 @@
-import os
-
-os.system("pip install psycopg2")
-
-
-import psycopg2
-
+try:
+  import psycopg2
+ except:
+  import os
+  os.system("pip install psycopg2")
 
 conn = psycopg2.connect(database="emlvwsts",
                         host="mahmud.db.elephantsql.com",
@@ -41,6 +39,22 @@ def read_db():
 def delall_db(name):
     cursor.execute(f"DELETE FROM {name}")
     conn.commit()
+
+
+def read_links():
+   cursor.execute("SELECT * FROM dled")
+   data = cursor.fetchall()
+   conn.commit()
+   return data
+
+
+
+def insert_links(ln):
+    query = "INSERT INTO dled (link) VALUES(%s);"
+    data = (ln,)
+    cursor.execute(query,data)
+    conn.commit() 
+
 
 
 

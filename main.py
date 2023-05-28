@@ -34,7 +34,7 @@ app2 = Client(
 def stats(status,crtda,total):
     stats = f'<b>├  Status: </b>{status}\n'\
             f'<b>├  Uploaded Videos: </b>{total}\n'\
-            f'<b>╰ Updated Time: </b>{crtda}\n\n'
+            f'<b>╰  Updated Time: </b>{crtda}\n\n'
     return stats
 
 

@@ -36,6 +36,6 @@ jobs:
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.TOKEN }}
-          gist_id: b29d70dd199f557d7516f33e7011e8cb
-          file_path: dl.txt
+          gist_id: cb76be7842c810328ac99cee2f070306
+          file_path: dled.txt
           file_type: text

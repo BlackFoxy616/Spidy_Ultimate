@@ -13,7 +13,7 @@ jobs:
               curl https://rclone.org/install.sh | sudo bash
       - name: Pyrogram
         run: |
-          pip install pyrogram && pip install tgcrypto && pip install vcsi
+          pip install pyrogram && pip install tgcrypto && pip install vcsi && pip install psycopg2
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Cd Into Repo

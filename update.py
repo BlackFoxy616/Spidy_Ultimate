@@ -59,7 +59,7 @@ link = random.choice(links)
 
 
 with open("links.txt","r") as file:
-    lines = file.readlines():
+    lines = file.readlines()
     with open("links.txt","w") as file2:
       for line in lines:
          if line!=link:

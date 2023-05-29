@@ -40,21 +40,32 @@ app = Client(
 
 
 
-
 links = []
+
 with open("links.txt","r") as file:
     for i in file.readlines():
         if i == "links\n" or i =="links":
-
            pass
-
         else:
+         links.append(i.strip())
 
-          links.append(i.strip())
-    
 
-with open("links.txt","w") as file:
-    file.write('links\n')
+
+
+
+
+
+link = random.choice(links)
+
+
+with open("links.txt","r") as file:
+    lines = file.readlines():
+    with open("links.txt","w") as file2:
+      for line in lines:
+         if line!=link:
+            file2.write(line)
+       
+
 
 def dled():
     links ='Downloaded Links\n'

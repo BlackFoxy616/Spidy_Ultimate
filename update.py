@@ -44,10 +44,17 @@ app = Client(
 links = []
 with open("links.txt","r") as file:
     for i in file.readlines():
-        links.append(i.strip())
+        if i == "links\n" or i =="links":
+
+           pass
+
+        else:
+
+          links.append(i.strip())
+    
 
 with open("links.txt","w") as file:
-    pass
+    file.write('links\n')
 
 def dled():
     links ='Downloaded Links\n'

@@ -43,6 +43,6 @@ jobs:
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.TOKEN }}
-          gist_id: 4570ddd630a3eb3ae757db3d440a163b
+          gist_id: 593c6801f377c28307ef290c8eb47486
           file_path: links.txt
           file_type: text

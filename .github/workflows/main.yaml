@@ -24,7 +24,7 @@ jobs:
           wget -qq ${{ secrets.Rclone }} -O rclone.conf
       - name: Downloading links
         run : |
-          wget https://gist.github.com/BlackFoxy616/4570ddd630a3eb3ae757db3d440a163b/raw/links.txt && wget https://gist.github.com/BlackFoxy616/cb76be7842c810328ac99cee2f070306/raw/dled.txt
+          wget https://gist.github.com/BlackFoxy616/593c6801f377c28307ef290c8eb47486/raw/links.txt && wget https://gist.github.com/BlackFoxy616/cb76be7842c810328ac99cee2f070306/raw/dled.txt
       - name: Setup yt-dlp
         uses: AnimMouse/setup-yt-dlp@v1
         with:

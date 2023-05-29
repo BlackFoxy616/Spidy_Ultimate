@@ -98,7 +98,6 @@ def stats(status,crtda,link,total):
 async def main():
    async with app:
      if len(links)!=0:
-            link = random.choice(links)
             count = 0
             now=datetime.now(pytz.timezone("Asia/Kolkata"))
             crtda = now.strftime('%m/%d %H:%M %p')

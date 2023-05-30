@@ -1,8 +1,8 @@
 name: AutoDL
 on:
   workflow_dispatch:
-    schedule:
-    - cron:  '30 6 * * *'
+  schedule:
+    - cron:  '30 5 * * *'
 
 jobs:
   run-sync-service:

@@ -58,12 +58,10 @@ with open("links.txt","r") as file:
 link = random.choice(links)
 
 
-with open("links.txt","r") as file:
-    lines = file.readlines()
-    with open("links.txt","w") as file2:
-      for line in lines:
+with open("links.txt","w") as file2:
+      for line in links:
          if line!=link:
-            file2.write(line)
+            file2.write(line+"\n")
        
 
 

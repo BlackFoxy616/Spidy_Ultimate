@@ -59,6 +59,7 @@ link = random.choice(links)
 
 
 with open("links.txt","w") as file2:
+      file2.write(links:+"\n")
       for line in links:
          if line!=link:
             file2.write(line+"\n")

@@ -49,7 +49,7 @@ with open("links.txt","r") as file:
         else:
          links.append(i.strip())
 
-
+print(links)
 
 
 
@@ -59,7 +59,7 @@ link = random.choice(links)
 
 
 with open("links.txt","w") as file2:
-      file2.write("links:\n")
+      #file2.write("links:\n")
       for line in links:
          if line!=link:
             file2.write(line+"\n")

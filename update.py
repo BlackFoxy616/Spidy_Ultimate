@@ -44,7 +44,7 @@ links = []
 
 with open("links.txt","r") as file:
     for i in file.readlines():
-        if i == "links\n" or i =="links":
+        if "links" in i:
            pass
         else:
          links.append(i.strip())

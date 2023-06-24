@@ -24,7 +24,7 @@ jobs:
           wget -qq ${{ secrets.Rclone }} -O rclone.conf
       - name: Downloading links
         run : |
-          wget https://gist.github.com/BlackFoxy616/593c6801f377c28307ef290c8eb47486/raw/links.txt && wget https://gist.github.com/BlackFoxy616/cb76be7842c810328ac99cee2f070306/raw/dled.txt && wget https://gist.github.com/BlackFoxy616/b29d70dd199f557d7516f33e7011e8cb/raw/dl.txt
+          wget https://gist.github.com/BlackFoxy616/129bec38c78a07355588b602ca2c5152/raw/links.txt && wget https://gist.github.com/BlackFoxy616/cb76be7842c810328ac99cee2f070306/raw/dled.txt && wget https://gist.github.com/BlackFoxy616/b29d70dd199f557d7516f33e7011e8cb/raw/dl.txt
       - name: Setup yt-dlp
         uses: AnimMouse/setup-yt-dlp@v1
         with:
@@ -43,6 +43,6 @@ jobs:
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.TOKEN }}
-          gist_id: 593c6801f377c28307ef290c8eb47486
+          gist_id: 129bec38c78a07355588b602ca2c5152
           file_path: links.txt
           file_type: text

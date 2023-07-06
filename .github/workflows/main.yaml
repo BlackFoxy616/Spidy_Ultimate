@@ -1,4 +1,4 @@
-name: Phvdl
+name: Anim
 on:
   workflow_dispatch:
   schedule:

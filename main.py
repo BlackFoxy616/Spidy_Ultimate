@@ -48,7 +48,7 @@ async def answer(client, call):
     
           #await app.send_message(call.message.chat.id,st)
           title = f"{name}-Ep-{int(data.index(url))+1}old"
-          os.system(f"yt-dlp --downloader aria2c -o '{title}.%(ext)s'")
+          os.system(f"yt-dlp --downloader aria2c -o '{title}.%(ext)s' {st}")
           os.system(f'''aria2c '{sub}' -o "{title}.{sub.split(".")[-1]}" ''')
           for file in os.listdir():
               if title in file and not (file.endswith("srt")) :

@@ -61,7 +61,7 @@ async def answer(client, call):
           for title in os.listdir():
             if filename in title and ("mkv" in title or "mp4" in title):
               os.system(f'''vcsi """{title}""" -g 2x2 --metadata-position hidden -o """{title.replace(title.split(".")[-1],"png")}""" ''')
-              await app.send_video(chat,f"{title}",thumb=f"""{title.replace(title.split(".")[-1],"png")}""", caption=title)
+              await app.send_video(chat,f"{title}",thumb=f"""{title.replace(title.split(".")[-1],"png")}""", caption=title,supports_streaming=True)
               
             elif filename in title:
                  print(filename)

@@ -46,15 +46,21 @@ async def answer(client, call):
           else:
                st = "http:"+sturl
     
-          await app.send_message(call.message.chat.id,st)
+          #await app.send_message(call.message.chat.id,st)
           title = f"{name}-Ep-{int(data.index(url))+1}old"
-          print(f"ytdlp --downloader aria2c -o '{title}.%(ext)s'")
-          print(f'''aria2c '{sub}' -o "{title}.{sub.split(".")[-1]}" ''')
+          os.system(f"yt-dlp --downloader aria2c -o '{title}.%(ext)s'")
+          os.system(f'''aria2c '{sub}' -o "{title}.{sub.split(".")[-1]}" ''')
           for file in os.listdir():
               if title in file and not (file.endswith("srt")) :
-                 print(f'''ffmpeg -i {file} -i {file.replace(file.split(".")[-1],"srt")} -c copy -c:s mov_text language=eng {file.replace("old","")}''')
-
-      
+                 os.system(f'''ffmpeg -i {file} -i {file.replace(file.split(".")[-1],"srt")} -c copy -c:s mov_text language=eng {file.replace("old","")}''')
+                 os.system(f'''vcsi """{file}""" -g 2x6 --metadata-position hidden -o """{file.replace(file.split(".")[-1],'.png')}""" ''')
+                 await send_video(call.chat.id,file.replace("old",""))
+                 await app.send_photo(call.chat.id, photo=file.replace(file.split(".")[-1],".png"))
+                 try:
+                  os.remove(file)
+                 except:
+                    pass
+                 
 print("Bot Started")
 app.run()
 

@@ -7,7 +7,7 @@ from pyrogram.types import (ReplyKeyboardMarkup, InlineKeyboardMarkup,
 # Create a client using your bot token
 api_id = 3702208
 api_hash = "3ee1acb7c7622166cf06bb38a19698a9"
-bot_token = "5300188722:AAFlruACp00Hv2ZD1RPjE9P0FahI52swqpU"
+bot_token = "5030635324:AAEaM9t5WBQHUeUAfJJK4r39h5457YwuD1k"
 
 app = Client(
     "my_bot",

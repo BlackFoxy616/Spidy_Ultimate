@@ -1,5 +1,4 @@
 import requests
-import yt_dlp
 
 
 base_url = "https://kisskh.co/api/"

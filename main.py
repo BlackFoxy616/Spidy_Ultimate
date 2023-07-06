@@ -56,7 +56,7 @@ async def answer(client, call):
 
 
           filename = f"{name}-Ep-{int(data.index(url))+1}"
-          os.system(f"""./yt-dlp --downloader aria2c -o '{filename}.%(ext)s' {st}""")
+          os.system(f"""yt-dlp --downloader aria2c -o '{filename}.%(ext)s' {st}""")
           #os.system(f'''aria2c '{sub}' -o "{filename}.{sub.split(".")[-1]}" ''')
           for title in os.listdir():
             if filename in title and ("mkv" in title or "mp4" in title):

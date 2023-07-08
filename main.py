@@ -33,6 +33,7 @@ async def start_command(client,message):
 
 @app.on_callback_query()
 async def answer(client, call):
+      try:
          chat = -1001502224148
          #print(chat)
          await app.delete_messages(chat,call.message.id)
@@ -66,7 +67,8 @@ async def answer(client, call):
             elif filename in title:
                  print(filename)
                  await app.send_document(chat,filename)  
-
+      except:
+          pass
 
 
          

@@ -25,9 +25,14 @@ async def start_command(client,message):
          #print(mess)
          cdid= message.chat.id
          button_list =[]
+         temp=[]
          for each in kidl(mess):
-             button_list.append([InlineKeyboardButton(each['title'], callback_data =str(each['title'])+"_"+str(each['id']))]) 
-             reply_markup=InlineKeyboardMarkup(button_list)
+             if len(temp) ==2:
+                button_list.append(temp)
+                temp =[]
+             temp.append([InlineKeyboardButton(each['title'], callback_data =str(each['title'])+"_"+str(each['id']))])
+             
+         reply_markup=InlineKeyboardMarkup(button_list)
          await app.send_message(
             cdid,"Select The Required Drama:",reply_markup=reply_markup)
 

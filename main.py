@@ -30,7 +30,7 @@ async def start_command(client,message):
              if len(temp) ==2:
                 button_list.append(temp)
                 temp =[]
-             temp.append(InlineKeyboardButton(each['title'], callback_data =str(each['title'])+"_"+str(each['id'])))
+             temp.append(InlineKeyboardButton(each['title'], callback_data =f"{mess}_"+str(each['id'])))
              
          reply_markup=InlineKeyboardMarkup(button_list)
          await app.send_message(
@@ -39,12 +39,18 @@ async def start_command(client,message):
 @app.on_callback_query()
 async def answer(client, call):
       try:
+         mess = call.data.split("_")[0]
+         did = int(call.data.split("_")[1])
+         for i in kidl(mess):
+            if i["id"] == did:
+               print(i["title"])
+               name = i["title"]
          chat = -1001502224148
          #print(chat)
          await app.delete_messages(chat,call.message.id)
          data = ddd(call.data.split("_")[1])
          for url in data:
-          name = call.data.split("_")[0]
+          #name = call.data.split("_")[0]
           id = str(url['id'])
           URL = base_url + "DramaList/Episode/"+id+".png?err=false&ts=&time="
           sub = get_subtitles(id)

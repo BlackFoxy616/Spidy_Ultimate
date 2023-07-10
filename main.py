@@ -30,7 +30,7 @@ async def start_command(client,message):
              if len(temp) ==2:
                 button_list.append(temp)
                 temp =[]
-             temp.append([InlineKeyboardButton(each['title'], callback_data =str(each['title'])+"_"+str(each['id']))])
+             temp.append(InlineKeyboardButton(each['title'], callback_data =str(each['title'])+"_"+str(each['id'])))
              
          reply_markup=InlineKeyboardMarkup(button_list)
          await app.send_message(

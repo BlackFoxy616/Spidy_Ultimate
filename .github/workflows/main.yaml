@@ -13,7 +13,7 @@ jobs:
           rclone help
       - name: Pyrogram
         run: |
-          pip install pyrogram && pip install tgcrypto && pip install vcsi && pip install psycopg2
+          pip install pyrofork && pip install tgcrypto && pip install vcsi && pip install psycopg2
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Cd Into Repo

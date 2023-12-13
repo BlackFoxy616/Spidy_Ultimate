@@ -18,7 +18,7 @@ app = Client(
 
 
 
-@app.on_message(filters.command("kh"))
+@app.on_message(filters.command("get"))
 async def start_command(client,message):
          mess= message.text[4:]
          await app.delete_messages(message.chat.id,message.id)

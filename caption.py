@@ -4,7 +4,7 @@ import os
 
 api_id = 12725757
 api_hash = "29e30e8d134c122f3733cc52891edd48"
-bot_token = "6751694050:AAEPfuYWXDq5OL_jQiqzacooOtcsC9AxA8U"
+bot_token = "5634634120:AAF4-pPK3rvRLadLhLCiAVuob7A5ZNuvr7Q"
 
 app = Client("Spidy_CapBot",
              api_id=api_id,

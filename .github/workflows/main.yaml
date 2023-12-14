@@ -1,4 +1,4 @@
-name: Anim
+name: Caption
 on:
   workflow_dispatch:
   schedule:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Pyrogram
         run: |
-          pip install pyrofork && pip install tgcrypto
+          pip install pyrogram && pip install tgcrypto
       - name: Checkout repository code
         uses: actions/checkout@v2
       - name: Cd Into Repo

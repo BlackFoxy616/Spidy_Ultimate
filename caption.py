@@ -47,8 +47,7 @@ async def addcaption(bot, message):
     add_caption(caption)
 
 
-@app.on_message(filters.channel &
-                (filters.document | filters.video | filters.audio))
+@app.on_message((filters.document | filters.video | filters.audio))
 async def main_caption(bot, message):
   caption_text = get_caption()
   if not caption_text:

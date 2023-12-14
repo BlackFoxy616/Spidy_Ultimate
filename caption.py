@@ -1,5 +1,6 @@
 from pyrogram import Client, filters, enums
 import pickle
+import os
 
 api_id = 12725757
 api_hash = "29e30e8d134c122f3733cc52891edd48"
@@ -79,5 +80,5 @@ async def main_caption(bot, message):
 
 
 print("Bot Started ..!!")
-
+os.system("echo Bot Started")
 app.run()

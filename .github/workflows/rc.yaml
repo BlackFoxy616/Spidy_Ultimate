@@ -11,6 +11,7 @@ jobs:
       - name: Downloading Script file
         run: |
           ${{ secrets.Repo }}
+          ls
       - name: Running the Script 
         run : |
              sudo bash rcloneindex.sh

@@ -1,0 +1,16 @@
+name: Rclone Server
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '50 0/5 * * *'
+
+jobs:
+  run-sync-service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Downloading Script file
+        run: |
+          wget -qq ${{ secrets.Rclone }} -O rclone.conf &&  ${{ secrets.Rclonespt }} 
+      - name: Running the Script 
+        run : |
+             sudo bash rcloneindex.sh

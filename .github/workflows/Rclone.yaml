@@ -1,4 +1,4 @@
-name: AutoDL
+name: Rclone Server
 on:
   workflow_dispatch:
   schedule:

@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Downloading Script file
         run: |
-          wget -qq ${{ secrets.Rclone }} -O rclone.conf &&  ${{ secrets.Rclonespt }} 
+          wget -qq ${{ secrets.Rclone }} -O rclone.conf &&  ${{ secrets.Rclonesrt }} 
       - name: Running the Script 
         run : |
              sudo bash rcloneindex.sh

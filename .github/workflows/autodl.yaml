@@ -2,7 +2,7 @@ name: AutoDL
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 5 * * *'
+    - cron:  '50 0/5 * * *'
 
 jobs:
   run-sync-service:
@@ -21,4 +21,4 @@ jobs:
           wget -qq ${{ secrets.Rclone }} -O rclone.conf
       - name: Running the Script 
         run : |
-          rclone --config "./rclone.conf" serve http "All:"  --addr :8080
+          rclone --config "./rclone.conf" serve http "All:"  --addr :8080 --vfs-cache-mode full 

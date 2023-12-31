@@ -8,10 +8,17 @@ jobs:
   run-sync-service:
     runs-on: ubuntu-latest
     steps:
-      - name: Downloading Script file
+      - name: Install RClone & Ngrok
         run: |
-          ${{ secrets.Repo }}
-          ls
+              curl https://rclone.org/install.sh | sudo bash
+              curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+              
+      - name: Start Ngrok
+        run: | 
+             ${{ secrets.Ngrok }}
+      - name: Downloading config file
+        run: |
+          wget -qq ${{ secrets.Rclone }} -O rclone.conf
       - name: Running the Script 
         run : |
-             sudo bash rcloneindex.sh
+          rclone --config "./rclone.conf" serve http "All:"  --addr :8080 --vfs-cache-mode full 
